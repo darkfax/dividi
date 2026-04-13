@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Dividi & Conquista! 🌸</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 :root{
@@ -28,1247 +28,611 @@ html,body{height:100%;overflow:hidden}
 body{
   font-family:'Nunito Sans',sans-serif;
   background:linear-gradient(170deg,var(--bg1) 0%,var(--bg2) 35%,var(--bg3) 65%,var(--ground) 88%,var(--ground2) 100%);
-  color:var(--text);
-  display:flex;justify-content:center;
+  color:var(--text);display:flex;justify-content:center;
 }
-.app{
-  width:100%;max-width:520px;height:100%;
-  display:flex;flex-direction:column;
-  position:relative;overflow:hidden;
-}
-
-/* ===== FLOATING ELEMENTS (hearts, stars, flowers) ===== */
+.app{width:100%;max-width:520px;height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .stars{position:fixed;top:0;left:0;width:100%;height:85%;pointer-events:none;z-index:0}
 .star{position:absolute;animation:floatUp var(--d) ease-in-out infinite alternate;opacity:0.35;font-size:var(--sz,14px)}
 @keyframes floatUp{0%{transform:translateY(0) rotate(0deg)}100%{transform:translateY(-12px) rotate(15deg)}}
-
-/* ===== PARTICLES ===== */
 .particle{position:fixed;pointer-events:none;z-index:999;border-radius:50%;animation:particleUp 0.8s ease-out forwards}
-@keyframes particleUp{
-  0%{opacity:1;transform:translate(0,0) scale(1)}
-  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0)}
-}
+@keyframes particleUp{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0)}}
 
-/* ===== TOP BAR ===== */
-.topbar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 16px 8px;z-index:10;flex-shrink:0;
-}
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 6px;z-index:10;flex-shrink:0}
 .topbar-left{display:flex;align-items:center;gap:10px}
-.avatar-circle{
-  width:48px;height:48px;border-radius:50%;
-  background:linear-gradient(135deg,var(--pink),var(--lilac));
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.6rem;box-shadow:0 3px 12px rgba(236,64,122,0.25);
-  border:3px solid white;
-  transition:transform 0.3s;
-}
+.avatar-circle{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--lilac));display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 3px 12px rgba(236,64,122,0.25);border:3px solid white;transition:transform 0.3s}
 .avatar-circle.levelup{animation:avatarPop 0.6s cubic-bezier(0.34,1.56,0.64,1)}
 @keyframes avatarPop{0%{transform:scale(1)}50%{transform:scale(1.3) rotate(10deg)}100%{transform:scale(1)}}
 .player-info{display:flex;flex-direction:column;gap:2px}
-.player-level{font-family:'Baloo 2',cursive;font-size:0.85rem;font-weight:700;color:var(--accent)}
-.xp-bar-wrap{width:80px;height:7px;background:rgba(206,147,216,0.25);border-radius:10px;overflow:hidden}
+.player-level{font-family:'Baloo 2',cursive;font-size:0.8rem;font-weight:700;color:var(--accent)}
+.player-name-display{font-size:0.7rem;color:var(--text-dim);font-weight:600}
+.xp-bar-wrap{width:80px;height:6px;background:rgba(206,147,216,0.25);border-radius:10px;overflow:hidden}
 .xp-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--lilac));border-radius:10px;transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1)}
+.topbar-right{display:flex;gap:8px;align-items:center}
+.stat-pill{display:flex;align-items:center;gap:4px;background:var(--card);backdrop-filter:blur(10px);padding:5px 10px;border-radius:20px;font-weight:800;font-size:0.8rem;box-shadow:0 2px 8px rgba(200,100,150,0.1);color:var(--text)}
+.back-menu-btn{-webkit-appearance:none;appearance:none;background:var(--card);border:2px solid rgba(236,64,122,0.15);border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);box-shadow:var(--shadow)}
 
-.topbar-right{display:flex;gap:10px;align-items:center}
-.stat-pill{
-  display:flex;align-items:center;gap:5px;
-  background:var(--card);backdrop-filter:blur(10px);
-  padding:6px 14px;border-radius:20px;
-  font-weight:800;font-size:0.85rem;
-  box-shadow:0 2px 8px rgba(200,100,150,0.1);
-  color:var(--text);
-}
+/* SCREENS */
+.screen{flex:1;display:flex;flex-direction:column;z-index:10;padding:20px}
+.screen.centered{align-items:center;justify-content:center;text-align:center;gap:16px}
+.hidden{display:none!important}
 
-/* ===== GAME MODE SELECTOR ===== */
-.mode-select{
-  flex:1;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:20px;z-index:10;gap:20px;
-}
-.mode-title{
-  font-family:'Baloo 2',cursive;font-size:2.2rem;font-weight:800;
-  text-align:center;line-height:1.2;
-  background:linear-gradient(135deg,var(--pink2),var(--lilac2),var(--accent));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.mode-subtitle{color:var(--text-dim);text-align:center;font-size:0.95rem;margin-top:-8px}
-.modes-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:14px;
-  width:100%;max-width:400px;
-}
-button.mode-card,
-.mode-card{
-  -webkit-appearance:none;appearance:none;
-  font:inherit;
-  background:var(--card);backdrop-filter:blur(12px);
-  border:2px solid rgba(236,64,122,0.12);
-  border-radius:var(--radius);padding:20px 14px;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  cursor:pointer;transition:all 0.25s;
-  text-align:center;position:relative;overflow:hidden;
-  box-shadow:var(--shadow);color:var(--text);
-}
-.mode-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.4));
-  pointer-events:none;
-}
+/* PROFILE SELECT */
+.profile-title{font-family:'Baloo 2',cursive;font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--pink2),var(--lilac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.profile-sub{color:var(--text-dim);font-size:0.9rem}
+.profiles-list{display:flex;flex-direction:column;gap:10px;width:100%;max-width:340px;max-height:45vh;overflow-y:auto}
+.profile-row{-webkit-appearance:none;appearance:none;font:inherit;background:var(--card);border:2px solid rgba(236,64,122,0.1);border-radius:var(--radius-sm);padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.2s;box-shadow:var(--shadow);color:var(--text);width:100%;text-align:left}
+.profile-row:active{transform:scale(0.97)}
+.profile-row .p-avatar{font-size:1.8rem}
+.profile-row .p-info{flex:1}
+.profile-row .p-name{font-family:'Baloo 2',cursive;font-weight:700;font-size:1rem}
+.profile-row .p-stats{font-size:0.7rem;color:var(--text-dim)}
+.profile-row .p-delete{font-size:0.9rem;padding:4px 8px;opacity:0.4}
+.new-profile-btn{-webkit-appearance:none;appearance:none;font:inherit;background:linear-gradient(135deg,var(--pink),var(--lilac));border:none;border-radius:var(--radius-sm);padding:14px 28px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;color:white;cursor:pointer;box-shadow:0 3px 12px rgba(236,64,122,0.2);margin-top:8px}
+
+/* NEW PROFILE CREATION */
+.avatar-picker{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:300px}
+.avatar-option{-webkit-appearance:none;appearance:none;font:inherit;background:var(--card);border:3px solid transparent;border-radius:50%;width:52px;height:52px;font-size:1.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.avatar-option.selected{border-color:var(--accent);background:rgba(236,64,122,0.1);transform:scale(1.15)}
+.name-input{-webkit-appearance:none;appearance:none;font:inherit;background:var(--card);border:2px solid rgba(236,64,122,0.15);border-radius:var(--radius-sm);padding:14px 18px;font-size:1.1rem;font-weight:700;text-align:center;color:var(--text);width:100%;max-width:260px;outline:none}
+.name-input:focus{border-color:var(--pink)}
+.create-btn{-webkit-appearance:none;appearance:none;font:inherit;background:linear-gradient(135deg,var(--pink),var(--lilac));border:none;border-radius:var(--radius-sm);padding:14px 36px;font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:700;color:white;cursor:pointer;box-shadow:0 3px 12px rgba(236,64,122,0.2)}
+.create-btn:disabled{opacity:0.4;cursor:default}
+.small-link{-webkit-appearance:none;appearance:none;font:inherit;background:none;border:none;color:var(--text-dim);font-size:0.85rem;cursor:pointer;text-decoration:underline}
+
+/* MODE SELECT */
+.mode-title{font-family:'Baloo 2',cursive;font-size:2rem;font-weight:800;text-align:center;line-height:1.2;background:linear-gradient(135deg,var(--pink2),var(--lilac2),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mode-subtitle{color:var(--text-dim);text-align:center;font-size:0.9rem}
+.modes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:380px}
+button.mode-card,.mode-card{-webkit-appearance:none;appearance:none;font:inherit;background:var(--card);backdrop-filter:blur(12px);border:2px solid rgba(236,64,122,0.12);border-radius:var(--radius);padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:all 0.25s;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow);color:var(--text)}
 .mode-card:active{transform:scale(0.95)}
-.mode-card:hover{border-color:var(--pink);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-.mode-emoji{font-size:2.4rem}
-.mode-name{font-family:'Baloo 2',cursive;font-weight:700;font-size:1.05rem;color:var(--text)}
-.mode-desc{font-size:0.75rem;color:var(--text-dim);line-height:1.3}
-.mode-card.locked{opacity:0.45;pointer-events:none}
-.mode-card.locked::after{
-  content:'🔒';position:absolute;top:8px;right:8px;font-size:1rem;
-}
+.mode-emoji{font-size:2.2rem}
+.mode-name{font-family:'Baloo 2',cursive;font-weight:700;font-size:0.95rem}
+.mode-desc{font-size:0.7rem;color:var(--text-dim);line-height:1.3}
+.bottom-links{display:flex;gap:16px;margin-top:12px}
 
-/* ===== GAME AREA ===== */
-.game-area{
-  flex:1;display:flex;flex-direction:column;
-  padding:0 16px 16px;z-index:10;
-  animation:slideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);
-}
+/* LEADERBOARD */
+.lb-title{font-family:'Baloo 2',cursive;font-size:1.6rem;font-weight:800;color:var(--accent)}
+.lb-list{display:flex;flex-direction:column;gap:8px;width:100%;max-width:340px;max-height:50vh;overflow-y:auto}
+.lb-row{background:var(--card);border-radius:var(--radius-sm);padding:12px 16px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow)}
+.lb-rank{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.1rem;width:28px;text-align:center}
+.lb-rank.gold{color:#FFB347}.lb-rank.silver{color:#B0BEC5}.lb-rank.bronze{color:#FFAB91}
+.lb-avatar{font-size:1.5rem}
+.lb-info{flex:1}
+.lb-name{font-family:'Baloo 2',cursive;font-weight:700;font-size:0.9rem}
+.lb-score{font-size:0.7rem;color:var(--text-dim)}
+
+/* TROPHIES */
+.trophies-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:340px;max-height:50vh;overflow-y:auto}
+.trophy-card{background:var(--card);border-radius:var(--radius-sm);padding:14px 8px;text-align:center;box-shadow:var(--shadow);transition:all 0.2s}
+.trophy-card.locked{opacity:0.3;filter:grayscale(1)}
+.trophy-emoji{font-size:2rem}
+.trophy-name{font-family:'Baloo 2',cursive;font-size:0.7rem;font-weight:700;margin-top:4px;color:var(--text)}
+.trophy-desc{font-size:0.6rem;color:var(--text-dim);margin-top:2px}
+
+/* GAME AREA */
+.game-area{flex:1;display:flex;flex-direction:column;padding:0 16px 16px;z-index:10;animation:slideUp 0.4s cubic-bezier(0.34,1.56,0.64,1)}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-
-.game-header{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:10px;
-}
-.game-mode-label{
-  font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;
-  display:flex;align-items:center;gap:6px;color:var(--text);
-}
-.game-timer{
-  font-family:'Baloo 2',cursive;font-size:1.4rem;font-weight:800;
-  color:var(--accent);min-width:60px;text-align:right;
-}
+.game-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.game-mode-label{font-family:'Baloo 2',cursive;font-size:0.95rem;font-weight:700;display:flex;align-items:center;gap:6px;color:var(--text)}
+.game-timer{font-family:'Baloo 2',cursive;font-size:1.3rem;font-weight:800;color:var(--accent);min-width:50px;text-align:right}
 .game-timer.danger{color:var(--red);animation:pulse 0.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-
-.progress-track{
-  height:10px;background:rgba(206,147,216,0.2);border-radius:10px;
-  margin-bottom:14px;overflow:hidden;
-}
-.progress-bar{
-  height:100%;border-radius:10px;
-  background:linear-gradient(90deg,var(--pink),var(--lilac),var(--gold));
-  transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1);
-}
-
-/* ===== QUESTION CARD ===== */
-.q-card{
-  background:var(--card-solid);
-  border:2px solid rgba(236,64,122,0.08);
-  border-radius:var(--radius);padding:24px 20px;
-  box-shadow:var(--shadow-lg);
-  flex:1;display:flex;flex-direction:column;
-  animation:cardFlip 0.35s ease-out;
-  position:relative;
-  overflow-y:auto;-webkit-overflow-scrolling:touch;
-}
-@keyframes cardFlip{
-  0%{opacity:0;transform:perspective(600px) rotateY(-8deg) scale(0.96)}
-  100%{opacity:1;transform:perspective(600px) rotateY(0) scale(1)}
-}
-.q-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:5px 12px;border-radius:20px;
-  font-size:0.75rem;font-weight:700;
-  text-transform:uppercase;letter-spacing:0.5px;
-  align-self:flex-start;margin-bottom:12px;
-}
+.progress-track{height:8px;background:rgba(206,147,216,0.2);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.progress-bar{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--pink),var(--lilac),var(--gold));transition:width 0.5s cubic-bezier(0.34,1.56,0.64,1)}
+.q-card{background:var(--card-solid);border:2px solid rgba(236,64,122,0.08);border-radius:var(--radius);padding:20px 18px;box-shadow:var(--shadow-lg);flex:1;display:flex;flex-direction:column;animation:cardFlip 0.35s ease-out;position:relative;overflow-y:auto;-webkit-overflow-scrolling:touch}
+@keyframes cardFlip{0%{opacity:0;transform:perspective(600px) rotateY(-8deg) scale(0.96)}100%{opacity:1;transform:perspective(600px) rotateY(0) scale(1)}}
+.q-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;align-self:flex-start;margin-bottom:10px}
 .badge-calc{background:rgba(186,104,200,0.15);color:var(--lilac2)}
 .badge-brain{background:rgba(102,187,106,0.15);color:var(--green)}
 .badge-trap{background:rgba(236,64,122,0.12);color:var(--pink2)}
 .badge-boss{background:rgba(255,179,71,0.18);color:#E65100}
-
-.q-text{
-  font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:600;
-  line-height:1.4;margin-bottom:20px;flex-shrink:0;color:var(--text);
-}
-.q-text .num{font-size:2.2rem;font-weight:800;color:var(--accent)}
-.q-text .op{font-size:1.8rem;color:var(--lilac2);margin:0 6px}
-
-.answers-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;
-  margin-top:auto;
-}
-.ans-btn{
-  background:rgba(248,216,232,0.4);
-  border:2px solid rgba(236,64,122,0.15);
-  border-radius:var(--radius-sm);padding:16px 10px;
-  font-family:'Baloo 2',cursive;font-size:1.3rem;font-weight:700;
-  color:var(--text);cursor:pointer;
-  transition:all 0.15s;text-align:center;line-height:1.3;
-  -webkit-user-select:none;user-select:none;
-}
-.ans-btn.textual{font-family:'Nunito Sans',sans-serif;font-size:0.95rem;font-weight:700}
+.q-text{font-family:'Baloo 2',cursive;font-size:1.4rem;font-weight:600;line-height:1.4;margin-bottom:16px;flex-shrink:0;color:var(--text)}
+.q-text .num{font-size:2rem;font-weight:800;color:var(--accent)}
+.q-text .op{font-size:1.6rem;color:var(--lilac2);margin:0 5px}
+.answers-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
+.ans-btn{-webkit-appearance:none;appearance:none;font:inherit;background:rgba(248,216,232,0.4);border:2px solid rgba(236,64,122,0.15);border-radius:var(--radius-sm);padding:14px 8px;font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:700;color:var(--text);cursor:pointer;transition:all 0.15s;text-align:center;line-height:1.3;-webkit-user-select:none;user-select:none}
+.ans-btn.textual{font-family:'Nunito Sans',sans-serif;font-size:0.85rem;font-weight:700}
 .ans-btn:active{transform:scale(0.93)}
-.ans-btn:hover{border-color:var(--pink);background:rgba(244,143,177,0.2)}
-.ans-btn.correct{
-  background:rgba(102,187,106,0.2);border-color:var(--green);
-  animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
-}
-.ans-btn.wrong{
-  background:rgba(239,83,80,0.15);border-color:var(--red);
-  animation:shake 0.4s;
-}
+.ans-btn.correct{background:rgba(102,187,106,0.2);border-color:var(--green);animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.ans-btn.wrong{background:rgba(239,83,80,0.15);border-color:var(--red);animation:shake 0.4s}
 @keyframes popIn{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
-
-/* ===== FEEDBACK ===== */
-.fb-area{margin-top:12px;animation:fadeIn 0.3s}
+.fb-area{margin-top:10px;animation:fadeIn 0.3s}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.fb-msg{
-  padding:12px 16px;border-radius:var(--radius-sm);
-  font-weight:700;font-size:0.95rem;text-align:center;
-}
+.fb-msg{padding:10px 14px;border-radius:var(--radius-sm);font-weight:700;font-size:0.9rem;text-align:center}
 .fb-msg.ok{background:rgba(102,187,106,0.15);color:#2E7D32}
 .fb-msg.ko{background:rgba(239,83,80,0.12);color:#C62828}
-.fb-explain{
-  margin-top:8px;padding:10px 14px;
-  background:rgba(186,104,200,0.1);border-radius:var(--radius-sm);
-  font-size:0.85rem;color:var(--lilac2);line-height:1.5;
-}
-.xp-toast{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-family:'Baloo 2',cursive;font-size:2.5rem;font-weight:800;
-  color:var(--gold);text-shadow:0 0 20px rgba(255,179,71,0.5);
-  z-index:1000;pointer-events:none;
-  animation:xpFloat 1s ease-out forwards;
-}
-@keyframes xpFloat{
-  0%{opacity:1;transform:translate(-50%,-50%) scale(0.5)}
-  30%{opacity:1;transform:translate(-50%,-60%) scale(1.2)}
-  100%{opacity:0;transform:translate(-50%,-120%) scale(0.8)}
-}
-.streak-toast{
-  position:fixed;top:30%;left:50%;transform:translate(-50%,-50%);
-  font-family:'Baloo 2',cursive;font-size:1.8rem;font-weight:800;
-  z-index:1000;pointer-events:none;
-  animation:streakPop 1.2s ease-out forwards;
-  text-shadow:0 0 16px rgba(236,64,122,0.4);
-}
-@keyframes streakPop{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(0) rotate(-10deg)}
-  20%{opacity:1;transform:translate(-50%,-50%) scale(1.3) rotate(5deg)}
-  40%{transform:translate(-50%,-50%) scale(1) rotate(0deg)}
-  100%{opacity:0;transform:translate(-50%,-80%) scale(0.7)}
-}
-
-.next-btn{
-  margin-top:10px;
-  background:linear-gradient(135deg,var(--pink),var(--lilac));
-  border:none;border-radius:var(--radius-sm);padding:14px;
-  font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:700;
-  color:white;cursor:pointer;width:100%;
-  transition:transform 0.2s;box-shadow:0 3px 12px rgba(236,64,122,0.2);
-}
-.next-btn:active{transform:scale(0.96)}
-.back-btn{
-  background:none;border:2px solid rgba(236,64,122,0.15);
-  border-radius:var(--radius-sm);padding:10px 20px;
-  font-family:'Baloo 2',cursive;font-size:0.9rem;font-weight:700;
-  color:var(--text-dim);cursor:pointer;margin-top:8px;width:100%;
-}
-
-/* ===== TRUE/FALSE BUTTONS ===== */
-.tf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:auto}
-.tf-btn{
-  padding:20px;border-radius:var(--radius);
-  font-family:'Baloo 2',cursive;font-size:1.4rem;font-weight:800;
-  cursor:pointer;border:3px solid transparent;
-  transition:all 0.15s;-webkit-user-select:none;user-select:none;
-}
-.tf-btn:active{transform:scale(0.93)}
+.fb-explain{margin-top:6px;padding:8px 12px;background:rgba(186,104,200,0.1);border-radius:var(--radius-sm);font-size:0.8rem;color:var(--lilac2);line-height:1.5}
+.xp-toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Baloo 2',cursive;font-size:2.2rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px rgba(255,179,71,0.5);z-index:1000;pointer-events:none;animation:xpFloat 1s ease-out forwards}
+@keyframes xpFloat{0%{opacity:1;transform:translate(-50%,-50%) scale(0.5)}30%{opacity:1;transform:translate(-50%,-60%) scale(1.2)}100%{opacity:0;transform:translate(-50%,-120%) scale(0.8)}}
+.streak-toast{position:fixed;top:30%;left:50%;transform:translate(-50%,-50%);font-family:'Baloo 2',cursive;font-size:1.6rem;font-weight:800;z-index:1000;pointer-events:none;animation:streakPop 1.2s ease-out forwards;text-shadow:0 0 16px rgba(236,64,122,0.4)}
+@keyframes streakPop{0%{opacity:0;transform:translate(-50%,-50%) scale(0) rotate(-10deg)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.3) rotate(5deg)}40%{transform:translate(-50%,-50%) scale(1) rotate(0deg)}100%{opacity:0;transform:translate(-50%,-80%) scale(0.7)}}
+.next-btn{-webkit-appearance:none;appearance:none;font:inherit;margin-top:8px;background:linear-gradient(135deg,var(--pink),var(--lilac));border:none;border-radius:var(--radius-sm);padding:12px;font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;color:white;cursor:pointer;width:100%;box-shadow:0 3px 12px rgba(236,64,122,0.2)}
+.tf-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.tf-btn{-webkit-appearance:none;appearance:none;font:inherit;padding:18px;border-radius:var(--radius);font-family:'Baloo 2',cursive;font-size:1.3rem;font-weight:800;cursor:pointer;border:3px solid transparent;transition:all 0.15s;-webkit-user-select:none;user-select:none}
 .tf-true{background:rgba(102,187,106,0.12);color:var(--green);border-color:rgba(102,187,106,0.25)}
 .tf-false{background:rgba(239,83,80,0.1);color:var(--red);border-color:rgba(239,83,80,0.2)}
 .tf-btn.correct{animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1)}
 .tf-btn.wrong{animation:shake 0.4s}
-
-/* ===== BOSS BATTLE ===== */
-.boss-hp-bar{
-  height:14px;background:rgba(206,147,216,0.2);border-radius:10px;
-  margin-bottom:16px;overflow:hidden;position:relative;
-}
-.boss-hp-fill{
-  height:100%;border-radius:10px;
-  background:linear-gradient(90deg,var(--gold),var(--pink));
-  transition:width 0.5s;
-}
-.boss-hp-label{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:0.7rem;font-weight:800;color:var(--text);
-}
-.boss-emoji{font-size:3rem;text-align:center;margin-bottom:8px;animation:bossIdle 2s infinite}
+.boss-hp-bar{height:12px;background:rgba(206,147,216,0.2);border-radius:10px;margin-bottom:12px;overflow:hidden;position:relative}
+.boss-hp-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--gold),var(--pink));transition:width 0.5s}
+.boss-hp-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;color:var(--text)}
+.boss-emoji{font-size:2.8rem;text-align:center;margin-bottom:6px;animation:bossIdle 2s infinite}
 @keyframes bossIdle{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(3deg)}}
 .boss-emoji.hit{animation:bossHit 0.4s}
 @keyframes bossHit{0%{transform:scale(1)}30%{transform:scale(0.8) rotate(-15deg)}70%{transform:scale(1.1) rotate(5deg)}100%{transform:scale(1)}}
 .boss-emoji.defeated{animation:bossDefeat 1s forwards}
 @keyframes bossDefeat{0%{transform:scale(1);opacity:1}50%{transform:scale(1.3) rotate(20deg)}100%{transform:scale(0) rotate(180deg);opacity:0}}
 
-/* ===== END SCREEN ===== */
-.end-screen{
-  flex:1;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  z-index:10;text-align:center;padding:20px;gap:12px;
-}
-.end-trophy{font-size:4.5rem;animation:bounce 2s infinite}
+/* END */
+.end-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;text-align:center;padding:20px;gap:10px}
+.end-trophy{font-size:4rem;animation:bounce 2s infinite}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-.end-title{font-family:'Baloo 2',cursive;font-size:2rem;font-weight:800;color:var(--text)}
-.end-score{font-family:'Baloo 2',cursive;font-size:3.5rem;font-weight:800;color:var(--accent)}
-.end-stars{font-size:2.2rem;letter-spacing:8px}
-.end-detail{font-size:0.9rem;color:var(--text-dim);max-width:280px;line-height:1.5}
-.end-xp{font-family:'Baloo 2',cursive;font-size:1.2rem;color:var(--lilac2);margin:4px 0}
-.play-again-btn{
-  background:linear-gradient(135deg,var(--pink),var(--lilac));
-  border:none;border-radius:24px;padding:16px 40px;
-  font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:700;
-  color:white;cursor:pointer;box-shadow:0 4px 20px rgba(236,64,122,0.25);
-  margin-top:8px;
-}
-
-/* ===== COMBO DISPLAY ===== */
-.combo-display{
-  position:absolute;top:8px;right:12px;
-  font-family:'Baloo 2',cursive;font-weight:800;font-size:0.85rem;
-  color:var(--pink2);opacity:0.9;
-}
-
-/* ===== RESPONSIVE ===== */
-@media(min-width:768px){
-  .q-text{font-size:1.65rem}
-  .q-text .num{font-size:2.5rem}
-  .ans-btn{font-size:1.4rem;padding:18px}
-  .mode-title{font-size:2.6rem}
-}
-
-.hidden{display:none!important}
+.end-title{font-family:'Baloo 2',cursive;font-size:1.8rem;font-weight:800;color:var(--text)}
+.end-score{font-family:'Baloo 2',cursive;font-size:3rem;font-weight:800;color:var(--accent)}
+.end-stars{font-size:2rem;letter-spacing:6px}
+.end-detail{font-size:0.85rem;color:var(--text-dim);max-width:280px;line-height:1.5}
+.end-xp{font-family:'Baloo 2',cursive;font-size:1.1rem;color:var(--lilac2)}
+.end-trophies{font-size:0.85rem;color:var(--gold2);font-weight:700}
+.play-again-btn{-webkit-appearance:none;appearance:none;font:inherit;background:linear-gradient(135deg,var(--pink),var(--lilac));border:none;border-radius:20px;padding:14px 36px;font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:700;color:white;cursor:pointer;box-shadow:0 4px 20px rgba(236,64,122,0.25)}
+.combo-display{position:absolute;top:6px;right:10px;font-family:'Baloo 2',cursive;font-weight:800;font-size:0.8rem;color:var(--pink2);opacity:0.9}
+@media(min-width:768px){.q-text{font-size:1.55rem}.q-text .num{font-size:2.3rem}.ans-btn{font-size:1.3rem;padding:16px}.mode-title{font-size:2.4rem}}
 </style>
 </head>
 <body>
-
 <div class="app" id="app">
-  <!-- STARS -->
-  <div class="stars" id="stars"></div>
+<div class="stars" id="stars"></div>
 
-  <!-- TOP BAR (always visible during game) -->
-  <div class="topbar hidden" id="topbar">
-    <div class="topbar-left">
-      <div class="avatar-circle" id="avatar">🌷</div>
-      <div class="player-info">
-        <div class="player-level" id="levelLabel">Livello 1</div>
-        <div class="xp-bar-wrap"><div class="xp-bar-fill" id="xpBar" style="width:0%"></div></div>
-      </div>
-    </div>
-    <div class="topbar-right">
-      <div class="stat-pill">⭐ <span id="totalScore">0</span></div>
-      <div class="stat-pill">🔥 <span id="streakDisp">0</span></div>
+<!-- TOPBAR -->
+<div class="topbar hidden" id="topbar">
+  <div class="topbar-left">
+    <div class="avatar-circle" id="avatar">🌷</div>
+    <div class="player-info">
+      <div class="player-name-display" id="playerNameDisp"></div>
+      <div class="player-level" id="levelLabel">Lv.1</div>
+      <div class="xp-bar-wrap"><div class="xp-bar-fill" id="xpBar" style="width:0%"></div></div>
     </div>
   </div>
-
-  <!-- SCREEN: MODE SELECT -->
-  <div class="mode-select" id="modeSelect">
-    <div class="mode-title">Dividi &<br>Conquista! 🌸</div>
-    <div class="mode-subtitle">Scegli la tua avventura!</div>
-    <div class="modes-grid">
-      <button class="mode-card" id="modeClassica">
-        <div class="mode-emoji">📚</div>
-        <div class="mode-name">Classica</div>
-        <div class="mode-desc">15 domande, tutto il tempo che vuoi</div>
-      </button>
-      <button class="mode-card" id="modeBlitz">
-        <div class="mode-emoji">⚡</div>
-        <div class="mode-name">Blitz</div>
-        <div class="mode-desc">Quante ne riesci in 60 secondi?</div>
-      </button>
-      <button class="mode-card" id="modeVeroFalso">
-        <div class="mode-emoji">🎯</div>
-        <div class="mode-name">Vero o Falso</div>
-        <div class="mode-desc">Velocità e intuito! Risposte lampo</div>
-      </button>
-      <button class="mode-card" id="modeBoss">
-        <div class="mode-emoji">🧚</div>
-        <div class="mode-name">Sfida Magica</div>
-        <div class="mode-desc">Sconfiggi la strega rispondendo!</div>
-      </button>
-    </div>
-  </div>
-
-  <!-- SCREEN: GAME -->
-  <div class="game-area hidden" id="gameArea">
-    <div class="game-header">
-      <div class="game-mode-label" id="gameModeLabel">📚 Classica</div>
-      <div class="game-timer hidden" id="gameTimer">60</div>
-    </div>
-    <div class="progress-track"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
-
-    <!-- Boss HP (only boss mode) -->
-    <div class="boss-emoji hidden" id="bossEmoji">🧙‍♀️</div>
-    <div class="boss-hp-bar hidden" id="bossHpBar">
-      <div class="boss-hp-fill" id="bossHpFill" style="width:100%"></div>
-      <div class="boss-hp-label" id="bossHpLabel">10 / 10</div>
-    </div>
-
-    <div class="q-card" id="qCard">
-      <div class="combo-display hidden" id="comboDisp">x2</div>
-      <div class="q-badge badge-calc" id="qBadge">🔢 Calcolo</div>
-      <div class="q-text" id="qText"></div>
-      <div class="answers-grid" id="answersGrid"></div>
-      <div class="fb-area hidden" id="fbArea"></div>
-    </div>
-  </div>
-
-  <!-- SCREEN: END -->
-  <div class="end-screen hidden" id="endScreen">
-    <div class="end-trophy" id="endTrophy">🏆</div>
-    <div class="end-title" id="endTitle">Bravissima!</div>
-    <div class="end-score" id="endScore">0</div>
-    <div class="end-stars" id="endStars"></div>
-    <div class="end-xp" id="endXp"></div>
-    <div class="end-detail" id="endDetail"></div>
-    <button class="play-again-btn" id="playAgainBtn">Torna al menù 🏠</button>
+  <div class="topbar-right">
+    <div class="stat-pill">⭐ <span id="totalScore">0</span></div>
+    <div class="stat-pill">🔥 <span id="streakDisp">0</span></div>
+    <button class="back-menu-btn" id="backMenuBtn">🏠</button>
   </div>
 </div>
 
+<!-- SCREEN: PROFILE SELECT -->
+<div class="screen centered" id="profileScreen">
+  <div style="font-size:3.5rem">🌸</div>
+  <div class="profile-title">Dividi & Conquista!</div>
+  <div class="profile-sub">Chi gioca?</div>
+  <div class="profiles-list" id="profilesList"></div>
+  <button class="new-profile-btn" id="newProfileBtn">+ Nuovo giocatore</button>
+  <button class="small-link" id="resetAllBtn" style="margin-top:12px;color:var(--red)">🗑️ Cancella tutti i dati</button>
+</div>
+
+<!-- SCREEN: CREATE PROFILE -->
+<div class="screen centered hidden" id="createScreen">
+  <div class="profile-title">Crea il tuo profilo!</div>
+  <div class="profile-sub">Scegli il tuo avatar</div>
+  <div class="avatar-picker" id="avatarPicker"></div>
+  <div class="profile-sub" style="margin-top:8px">Come ti chiami?</div>
+  <input class="name-input" id="nameInput" type="text" placeholder="Il tuo nome..." maxlength="12" autocomplete="off">
+  <button class="create-btn" id="createBtn" disabled>Iniziamo! 🚀</button>
+  <button class="small-link" id="backToProfiles">← Torna indietro</button>
+</div>
+
+<!-- SCREEN: MODE SELECT -->
+<div class="screen centered hidden" id="modeScreen">
+  <div class="mode-title">Ciao <span id="welcomeName"></span>! 🌸</div>
+  <div class="mode-subtitle">Scegli la tua avventura</div>
+  <div class="modes-grid">
+    <button class="mode-card" id="modeClassica"><div class="mode-emoji">📚</div><div class="mode-name">Classica</div><div class="mode-desc">15 domande con calma</div></button>
+    <button class="mode-card" id="modeBlitz"><div class="mode-emoji">⚡</div><div class="mode-name">Blitz</div><div class="mode-desc">Quante in 60 secondi?</div></button>
+    <button class="mode-card" id="modeVeroFalso"><div class="mode-emoji">🎯</div><div class="mode-name">Vero o Falso</div><div class="mode-desc">Risposte lampo!</div></button>
+    <button class="mode-card" id="modeBoss"><div class="mode-emoji">🧚</div><div class="mode-name">Sfida Magica</div><div class="mode-desc">Sconfiggi la strega!</div></button>
+  </div>
+  <div class="bottom-links">
+    <button class="small-link" id="showLeaderboard">🏆 Classifica</button>
+    <button class="small-link" id="showTrophies">🎖️ Trofei</button>
+    <button class="small-link" id="switchProfile">👤 Cambia giocatore</button>
+  </div>
+</div>
+
+<!-- SCREEN: LEADERBOARD -->
+<div class="screen centered hidden" id="lbScreen">
+  <div class="lb-title">🏆 Classifica</div>
+  <div class="lb-list" id="lbList"></div>
+  <button class="small-link" id="lbBack" style="margin-top:12px">← Torna al menù</button>
+</div>
+
+<!-- SCREEN: TROPHIES -->
+<div class="screen centered hidden" id="trophyScreen">
+  <div class="lb-title">🎖️ I miei trofei</div>
+  <div class="trophies-grid" id="trophiesGrid"></div>
+  <button class="small-link" id="trophyBack" style="margin-top:12px">← Torna al menù</button>
+</div>
+
+<!-- SCREEN: GAME -->
+<div class="game-area hidden" id="gameArea">
+  <div class="game-header">
+    <div class="game-mode-label" id="gameModeLabel">📚 Classica</div>
+    <div class="game-timer hidden" id="gameTimer">60</div>
+  </div>
+  <div class="progress-track"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+  <div class="boss-emoji hidden" id="bossEmoji">🧙‍♀️</div>
+  <div class="boss-hp-bar hidden" id="bossHpBar"><div class="boss-hp-fill" id="bossHpFill" style="width:100%"></div><div class="boss-hp-label" id="bossHpLabel">10/10</div></div>
+  <div class="q-card" id="qCard">
+    <div class="combo-display hidden" id="comboDisp">x2</div>
+    <div class="q-badge badge-calc" id="qBadge">🔢 Calcolo</div>
+    <div class="q-text" id="qText"></div>
+    <div class="answers-grid" id="answersGrid"></div>
+    <div class="fb-area hidden" id="fbArea"></div>
+  </div>
+</div>
+
+<!-- SCREEN: END -->
+<div class="end-screen hidden" id="endScreen">
+  <div class="end-trophy" id="endTrophy">🏆</div>
+  <div class="end-title" id="endTitle">Bravissima!</div>
+  <div class="end-score" id="endScore">0</div>
+  <div class="end-stars" id="endStars"></div>
+  <div class="end-xp" id="endXp"></div>
+  <div class="end-trophies" id="endNewTrophies"></div>
+  <div class="end-detail" id="endDetail"></div>
+  <button class="play-again-btn" id="playAgainBtn">Torna al menù 🏠</button>
+</div>
+</div>
+
 <script>
-// =============================================
-// AUDIO (Web Audio API - simple synth sounds)
-// =============================================
-const AudioCtx = window.AudioContext || window.webkitAudioContext;
-let audioCtx;
-function ensureAudio(){if(!audioCtx)audioCtx=new AudioCtx()}
-function playTone(freq,dur,type='sine',vol=0.15){
-  try{
-    ensureAudio();
-    const o=audioCtx.createOscillator(),g=audioCtx.createGain();
-    o.type=type;o.frequency.value=freq;
-    g.gain.setValueAtTime(vol,audioCtx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+dur);
-    o.connect(g);g.connect(audioCtx.destination);
-    o.start();o.stop(audioCtx.currentTime+dur);
-  }catch(e){}
-}
-function sfxCorrect(){playTone(784,0.12,'triangle',0.1);setTimeout(()=>playTone(988,0.12,'triangle',0.1),100);setTimeout(()=>playTone(1175,0.18,'triangle',0.08),200)}
-function sfxWrong(){playTone(392,0.2,'sine',0.07);setTimeout(()=>playTone(349,0.25,'sine',0.06),150)}
-function sfxLevelUp(){[784,988,1175,1568].forEach((f,i)=>setTimeout(()=>playTone(f,0.18,'triangle',0.08),i*120))}
-function sfxBossHit(){playTone(523,0.12,'triangle',0.08);setTimeout(()=>playTone(659,0.1,'triangle',0.07),80)}
-function sfxBossDefeat(){[784,988,1175,1319,1480,1568].forEach((f,i)=>setTimeout(()=>playTone(f,0.15,'triangle',0.07),i*100))}
+// === AUDIO ===
+var AudioCtx=window.AudioContext||window.webkitAudioContext;var audioCtx;
+function ensureAudio(){try{if(!audioCtx)audioCtx=new AudioCtx()}catch(e){}}
+function playTone(f,d,t,v){try{ensureAudio();if(!audioCtx)return;var o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=t||'sine';o.frequency.value=f;g.gain.setValueAtTime(v||0.1,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+d);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+d)}catch(e){}}
+function sfxCorrect(){playTone(784,0.12,'triangle',0.1);setTimeout(function(){playTone(988,0.12,'triangle',0.1)},100);setTimeout(function(){playTone(1175,0.18,'triangle',0.08)},200)}
+function sfxWrong(){playTone(392,0.2,'sine',0.07);setTimeout(function(){playTone(349,0.25,'sine',0.06)},150)}
+function sfxLevelUp(){var fs=[784,988,1175,1568];for(var i=0;i<fs.length;i++)(function(f,d){setTimeout(function(){playTone(f,0.18,'triangle',0.08)},d)})(fs[i],i*120)}
+function sfxBossHit(){playTone(523,0.12,'triangle',0.08);setTimeout(function(){playTone(659,0.1,'triangle',0.07)},80)}
+function sfxBossDefeat(){var fs=[784,988,1175,1319,1480,1568];for(var i=0;i<fs.length;i++)(function(f,d){setTimeout(function(){playTone(f,0.15,'triangle',0.07)},d)})(fs[i],i*100)}
 function sfxTick(){playTone(1047,0.04,'sine',0.04)}
 
-// =============================================
-// STARS
-// =============================================
-try{(function initStars(){
-  const c=document.getElementById('stars');
-  if(!c)return;
-  const shapes=['✿','❀','♡','☆','✧','🌸','🦋','·','◦'];
-  for(let i=0;i<45;i++){
-    const s=document.createElement('div');s.className='star';
-    const shape=shapes[Math.floor(Math.random()*shapes.length)];
-    s.textContent=shape;
-    const sz=10+Math.random()*16;
-    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--sz:${sz}px;animation-delay:${Math.random()*3}s`;
-    c.appendChild(s);
-  }
-})()}catch(e){}
+// === DECORATIONS ===
+try{(function(){var c=document.getElementById('stars');if(!c)return;var shapes=['✿','❀','♡','☆','✧','🌸','🦋','·','◦'];for(var i=0;i<40;i++){var s=document.createElement('div');s.className='star';s.textContent=shapes[Math.floor(Math.random()*shapes.length)];s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--d:'+(2+Math.random()*4)+'s;--sz:'+(10+Math.random()*16)+'px;animation-delay:'+Math.random()*3+'s';c.appendChild(s)}})()}catch(e){}
 
-// =============================================
-// PARTICLES
-// =============================================
-function burstParticles(x,y,color,count=12){
-  for(let i=0;i<count;i++){
-    const p=document.createElement('div');p.className='particle';
-    const angle=Math.random()*Math.PI*2,dist=40+Math.random()*60;
-    const dx=Math.cos(angle)*dist,dy=Math.sin(angle)*dist;
-    const size=4+Math.random()*6;
-    p.style.cssText=`left:${x}px;top:${y}px;width:${size}px;height:${size}px;background:${color};--dx:${dx}px;--dy:${dy}px`;
-    document.body.appendChild(p);
-    setTimeout(()=>p.remove(),800);
-  }
+function burstParticles(x,y,color,count){count=count||12;for(var i=0;i<count;i++){var p=document.createElement('div');p.className='particle';var a=Math.random()*Math.PI*2,dist=40+Math.random()*60;p.style.cssText='left:'+x+'px;top:'+y+'px;width:'+(4+Math.random()*6)+'px;height:'+(4+Math.random()*6)+'px;background:'+color+';--dx:'+Math.cos(a)*dist+'px;--dy:'+Math.sin(a)*dist+'px';document.body.appendChild(p);setTimeout(function(el){return function(){el.remove()}}(p),800)}}
+function confettiBurst(count){var colors=['#F48FB1','#CE93D8','#FFB347','#80CBC4','#F8BBD0','#B39DDB','#FFCC80','#A5D6A7'];for(var i=0;i<(count||40);i++){var p=document.createElement('div');p.className='particle';p.style.cssText='left:'+Math.random()*window.innerWidth+'px;top:-10px;width:'+(5+Math.random()*8)+'px;height:'+(5+Math.random()*8)+'px;background:'+colors[Math.floor(Math.random()*colors.length)]+';--dx:'+(Math.random()-0.5)*200+'px;--dy:'+(window.innerHeight*0.6+Math.random()*200)+'px;border-radius:'+(Math.random()>0.5?'50%':'2px')+';animation-duration:'+(1+Math.random()*1.5)+'s;animation-delay:'+Math.random()*0.4+'s';document.body.appendChild(p);setTimeout(function(el){return function(){el.remove()}}(p),2500)}}
+
+// === STORAGE ===
+function storeGet(k){try{if(typeof localStorage==='undefined')return null;var v=localStorage.getItem(k);return v?JSON.parse(v):null}catch(e){return null}}
+function storeSet(k,v){try{if(typeof localStorage!=='undefined')localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+// === PROFILES ===
+var AVATAR_LIST=['🌷','🌸','🦋','🌺','🦄','🌈','👸','🐱','🐰','🌻','🍓','🎀','💖','🐬','🦊','🐝'];
+var currentProfile=null;
+
+function getProfiles(){return storeGet('dc_profiles')||[]}
+function saveProfiles(p){storeSet('dc_profiles',p)}
+
+function showScreen(id){var screens=['profileScreen','createScreen','modeScreen','lbScreen','trophyScreen','gameArea','endScreen'];for(var i=0;i<screens.length;i++)document.getElementById(screens[i]).classList.add('hidden');document.getElementById(id).classList.remove('hidden');var tb=document.getElementById('topbar');if(id==='gameArea'||id==='endScreen')tb.classList.remove('hidden');else tb.classList.add('hidden')}
+
+function renderProfiles(){
+  var list=document.getElementById('profilesList');list.innerHTML='';
+  var profiles=getProfiles();
+  for(var i=0;i<profiles.length;i++){(function(p,idx){
+    var row=document.createElement('button');row.className='profile-row';
+    row.innerHTML='<span class="p-avatar">'+p.avatar+'</span><div class="p-info"><div class="p-name">'+p.name+'</div><div class="p-stats">Lv.'+p.level+' · ⭐ '+p.totalCorrect+'</div></div><span class="p-delete">✕</span>';
+    var deleteMode=false;
+    row.addEventListener('click',function(e){
+      if(e.target.classList.contains('p-delete')){
+        if(!deleteMode){
+          deleteMode=true;
+          e.target.textContent='Elimina?';
+          e.target.style.cssText='font-size:0.7rem;padding:6px 10px;background:var(--red);color:white;border-radius:10px;opacity:1';
+          setTimeout(function(){if(deleteMode){deleteMode=false;e.target.textContent='✕';e.target.style.cssText='font-size:0.9rem;padding:4px 8px;opacity:0.4'}},3000);
+        }else{
+          var ps=getProfiles();ps.splice(idx,1);saveProfiles(ps);renderProfiles();
+        }
+        return;
+      }
+      selectProfile(idx);
+    });
+    list.appendChild(row);
+  })(profiles[i],i)}
+  if(profiles.length===0)list.innerHTML='<div style="color:var(--text-dim);font-size:0.9rem;padding:20px">Nessun giocatore ancora!<br>Crea il tuo profilo 🌟</div>';
 }
 
-function confettiBurst(count=50){
-  const colors=['#F48FB1','#CE93D8','#FFB347','#80CBC4','#F8BBD0','#B39DDB','#FFCC80','#A5D6A7'];
-  for(let i=0;i<count;i++){
-    const p=document.createElement('div');p.className='particle';
-    const x=Math.random()*window.innerWidth,y=-10;
-    const dx=(Math.random()-0.5)*200,dy=window.innerHeight*0.6+Math.random()*200;
-    const size=5+Math.random()*8;
-    p.style.cssText=`left:${x}px;top:${y}px;width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};--dx:${dx}px;--dy:${dy}px;border-radius:${Math.random()>0.5?'50%':'2px'};animation-duration:${1+Math.random()*1.5}s;animation-delay:${Math.random()*0.4}s`;
-    document.body.appendChild(p);
-    setTimeout(()=>p.remove(),2500);
-  }
-}
-
-// =============================================
-// GAME STATE & PROGRESSION
-// =============================================
-let G={
-  // Persistent (saved to storage)
-  xp:0, level:1, totalCorrect:0,
-  // Session
-  mode:'', score:0, streak:0, bestStreak:0,
-  current:0, questions:[], answered:false,
-  total:15, timer:0, timerInterval:null,
-  bossHp:0, bossMaxHp:0, blitzCount:0,
-};
-
-const AVATARS=['🌷','🌸','🦋','🌺','🦄','🌈','👸','💎','💫','👑'];
-const LEVEL_NAMES=['Fiorellino','Farfallina','Stellina','Esploratrice','Fatina','Principessa','Regina','Leggenda'];
-const XP_PER_LEVEL=100;
-
-function xpForLevel(lvl){return lvl*XP_PER_LEVEL}
-function getAvatar(){return AVATARS[Math.min(G.level-1,AVATARS.length-1)]}
-function getLevelName(){return LEVEL_NAMES[Math.min(G.level-1,LEVEL_NAMES.length-1)]}
-
-function loadProgress(){
-  try{
-    if(typeof localStorage==='undefined')return;
-    const raw=localStorage.getItem('dc2_progress');
-    if(!raw)return;
-    const d=JSON.parse(raw);
-    G.xp=d.xp||0;G.level=d.level||1;G.totalCorrect=d.totalCorrect||0;
-  }catch(e){}
-}
-function saveProgress(){
-  try{
-    if(typeof localStorage==='undefined')return;
-    localStorage.setItem('dc2_progress',JSON.stringify({xp:G.xp,level:G.level,totalCorrect:G.totalCorrect}));
-  }catch(e){}
-}
-
-function addXP(amount){
-  G.xp+=amount;
-  let leveled=false;
-  while(G.xp>=xpForLevel(G.level)){
-    G.xp-=xpForLevel(G.level);
-    G.level++;
-    leveled=true;
-  }
-  if(leveled){
-    sfxLevelUp();
-    document.getElementById('avatar').classList.add('levelup');
-    setTimeout(()=>document.getElementById('avatar').classList.remove('levelup'),700);
-    showStreakToast(`⬆️ Livello ${G.level}!`);
-  }
+function selectProfile(idx){
+  var profiles=getProfiles();
+  currentProfile=profiles[idx];
+  currentProfile._idx=idx;
+  document.getElementById('welcomeName').textContent=currentProfile.name;
   updateTopbar();
-  saveProgress();
+  showScreen('modeScreen');
 }
 
+// === CREATE PROFILE ===
+var selectedAvatar='';
+function renderAvatarPicker(){
+  var picker=document.getElementById('avatarPicker');picker.innerHTML='';
+  for(var i=0;i<AVATAR_LIST.length;i++){(function(av){
+    var btn=document.createElement('button');btn.className='avatar-option';btn.textContent=av;
+    btn.addEventListener('click',function(){
+      var all=picker.querySelectorAll('.avatar-option');for(var j=0;j<all.length;j++)all[j].classList.remove('selected');
+      btn.classList.add('selected');selectedAvatar=av;checkCreateReady();
+    });
+    picker.appendChild(btn);
+  })(AVATAR_LIST[i])}
+}
+function checkCreateReady(){
+  var name=document.getElementById('nameInput').value.trim();
+  document.getElementById('createBtn').disabled=!(name.length>0&&selectedAvatar);
+}
+function createProfile(){
+  var name=document.getElementById('nameInput').value.trim();
+  if(!name||!selectedAvatar)return;
+  var profiles=getProfiles();
+  profiles.push({name:name,avatar:selectedAvatar,xp:0,level:1,totalCorrect:0,bestStreak:0,gamesPlayed:0,trophies:[]});
+  saveProfiles(profiles);
+  document.getElementById('nameInput').value='';selectedAvatar='';
+  renderProfiles();selectProfile(profiles.length-1);
+}
+
+// === TROPHIES SYSTEM ===
+var ALL_TROPHIES=[
+  {id:'first_game',emoji:'🎯',name:'Prima partita',desc:'Completa una partita'},
+  {id:'streak_3',emoji:'🔥',name:'Combo!',desc:'3 risposte giuste di fila'},
+  {id:'streak_7',emoji:'🔥🔥',name:'Super combo!',desc:'7 risposte giuste di fila'},
+  {id:'streak_10',emoji:'💥',name:'Inarrestabile!',desc:'10 risposte giuste di fila'},
+  {id:'perfect',emoji:'💎',name:'Perfetto!',desc:'15/15 in modalità Classica'},
+  {id:'boss_win',emoji:'🧚',name:'Cacciatrice di streghe',desc:'Sconfiggi la strega'},
+  {id:'blitz_10',emoji:'⚡',name:'Fulmine!',desc:'10+ risposte giuste nel Blitz'},
+  {id:'blitz_20',emoji:'⚡⚡',name:'Saetta!',desc:'20+ risposte giuste nel Blitz'},
+  {id:'games_5',emoji:'📚',name:'Studentessa',desc:'Gioca 5 partite'},
+  {id:'games_20',emoji:'🎓',name:'Professoressa',desc:'Gioca 20 partite'},
+  {id:'total_100',emoji:'💯',name:'Centenaria!',desc:'100 risposte giuste in totale'},
+  {id:'level_5',emoji:'👸',name:'Principessa',desc:'Raggiungi il livello 5'},
+];
+
+function awardTrophy(id){
+  if(!currentProfile)return false;
+  if(currentProfile.trophies.indexOf(id)>=0)return false;
+  currentProfile.trophies.push(id);
+  saveCurrentProfile();return true;
+}
+function checkTrophies(){
+  var p=currentProfile,newOnes=[];
+  if(p.gamesPlayed>=1&&awardTrophy('first_game'))newOnes.push('🎯 Prima partita!');
+  if(p.bestStreak>=3&&awardTrophy('streak_3'))newOnes.push('🔥 Combo!');
+  if(p.bestStreak>=7&&awardTrophy('streak_7'))newOnes.push('🔥🔥 Super combo!');
+  if(p.bestStreak>=10&&awardTrophy('streak_10'))newOnes.push('💥 Inarrestabile!');
+  if(p.gamesPlayed>=5&&awardTrophy('games_5'))newOnes.push('📚 Studentessa!');
+  if(p.gamesPlayed>=20&&awardTrophy('games_20'))newOnes.push('🎓 Professoressa!');
+  if(p.totalCorrect>=100&&awardTrophy('total_100'))newOnes.push('💯 Centenaria!');
+  if(p.level>=5&&awardTrophy('level_5'))newOnes.push('👸 Principessa!');
+  return newOnes;
+}
+function renderTrophies(){
+  var grid=document.getElementById('trophiesGrid');grid.innerHTML='';
+  var has=currentProfile?currentProfile.trophies:[];
+  for(var i=0;i<ALL_TROPHIES.length;i++){var t=ALL_TROPHIES[i];var unlocked=has.indexOf(t.id)>=0;
+    var card=document.createElement('div');card.className='trophy-card'+(unlocked?'':' locked');
+    card.innerHTML='<div class="trophy-emoji">'+t.emoji+'</div><div class="trophy-name">'+t.name+'</div><div class="trophy-desc">'+t.desc+'</div>';
+    grid.appendChild(card);
+  }
+}
+
+// === LEADERBOARD ===
+function renderLeaderboard(){
+  var list=document.getElementById('lbList');list.innerHTML='';
+  var profiles=getProfiles().slice().sort(function(a,b){return b.totalCorrect-a.totalCorrect});
+  var medals=['gold','silver','bronze'];
+  for(var i=0;i<profiles.length;i++){var p=profiles[i];
+    var row=document.createElement('div');row.className='lb-row';
+    row.innerHTML='<div class="lb-rank '+(i<3?medals[i]:'')+'">'+(['🥇','🥈','🥉'][i]||(i+1))+'</div><div class="lb-avatar">'+p.avatar+'</div><div class="lb-info"><div class="lb-name">'+p.name+'</div><div class="lb-score">Lv.'+p.level+' · ⭐ '+p.totalCorrect+' · 🔥 '+p.bestStreak+'</div></div>';
+    list.appendChild(row);
+  }
+  if(profiles.length===0)list.innerHTML='<div style="color:var(--text-dim);padding:20px">Nessun giocatore ancora!</div>';
+}
+
+// === GAME STATE ===
+var G={mode:'',score:0,streak:0,bestStreak:0,current:0,questions:[],answered:false,total:15,timer:0,timerInterval:null,bossHp:0,bossMaxHp:0,blitzCount:0};
+var LEVEL_NAMES=['Fiorellino','Farfallina','Stellina','Esploratrice','Fatina','Principessa','Regina','Leggenda'];
+var XP_PER_LEVEL=100;
+
+function xpForLevel(l){return l*XP_PER_LEVEL}
+function getLevelName(){if(!currentProfile)return'';return LEVEL_NAMES[Math.min(currentProfile.level-1,LEVEL_NAMES.length-1)]}
+function saveCurrentProfile(){if(!currentProfile)return;var ps=getProfiles();ps[currentProfile._idx]=currentProfile;saveProfiles(ps)}
+function addXP(amount){
+  if(!currentProfile)return;currentProfile.xp+=amount;var leveled=false;
+  while(currentProfile.xp>=xpForLevel(currentProfile.level)){currentProfile.xp-=xpForLevel(currentProfile.level);currentProfile.level++;leveled=true}
+  if(leveled){sfxLevelUp();document.getElementById('avatar').classList.add('levelup');setTimeout(function(){document.getElementById('avatar').classList.remove('levelup')},700);showStreakToast('⬆️ Livello '+currentProfile.level+'!')}
+  updateTopbar();saveCurrentProfile();
+}
 function updateTopbar(){
-  document.getElementById('avatar').textContent=getAvatar();
-  document.getElementById('levelLabel').textContent=`Lv.${G.level} ${getLevelName()}`;
-  document.getElementById('xpBar').style.width=`${(G.xp/xpForLevel(G.level))*100}%`;
+  if(!currentProfile)return;
+  document.getElementById('avatar').textContent=currentProfile.avatar;
+  document.getElementById('playerNameDisp').textContent=currentProfile.name;
+  document.getElementById('levelLabel').textContent='Lv.'+currentProfile.level+' '+getLevelName();
+  document.getElementById('xpBar').style.width=(currentProfile.xp/xpForLevel(currentProfile.level))*100+'%';
   document.getElementById('totalScore').textContent=G.score;
   document.getElementById('streakDisp').textContent=G.streak;
 }
 
-// =============================================
-// QUESTION GENERATORS (same logic, expanded)
-// =============================================
+// === QUESTION GENERATORS ===
 function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a}
-function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-function wrongAnswers(c,n,min,max){
-  const w=new Set();
-  [-2,-1,1,2,-3,3].forEach(d=>{const v=c+d;if(v>0&&v!==c&&v>=min&&v<=max)w.add(v)});
-  let t=0;while(w.size<n&&t<50){const v=ri(min,max);if(v!==c)w.add(v);t++}
-  return shuffle([...w]).slice(0,n);
-}
+function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t}return b}
+function wrongAnswers(c,n,min,max){var w={};var arr=[-2,-1,1,2,-3,3];for(var i=0;i<arr.length;i++){var v=c+arr[i];if(v>0&&v!==c&&v>=min&&v<=max)w[v]=true}var t=0;while(Object.keys(w).length<n&&t<50){var v2=ri(min,max);if(v2!==c)w[v2]=true;t++}return shuffle(Object.keys(w).map(Number)).slice(0,n)}
 
-function qNumericDiv(){
-  const d=ri(2,10),q=ri(1,10),dd=d*q;
-  const opts=shuffle([q,...wrongAnswers(q,3,1,12)]);
-  // Vary the visual presentation
-  const templates=[
-    `<span class="num">${dd}</span> <span class="op">÷</span> <span class="num">${d}</span> <span class="op">=</span> <span class="num">?</span>`,
-    `Quanto fa <span class="num">${dd}</span> <span class="op">÷</span> <span class="num">${d}</span>?`,
-    `Calcola: <span class="num">${dd}</span> diviso <span class="num">${d}</span>`,
-  ];
-  return{type:'calc',badge:'🔢 Calcolo',cls:'badge-calc',
-    html:templates[ri(0,templates.length-1)],
-    options:opts.map(String),correct:String(q),
-    explain:`${dd} ÷ ${d} = ${q}, perché ${d} × ${q} = ${dd}`};
-}
-function qQuanteVolte(){
-  const d=ri(2,10),q=ri(1,10),dd=d*q;
-  const opts=shuffle([q,...wrongAnswers(q,3,1,12)]);
-  const templates=[
-    `Quante volte il <span class="num">${d}</span> sta nel <span class="num">${dd}</span>?`,
-    `Quante volte entra il <span class="num">${d}</span> nel <span class="num">${dd}</span>?`,
-    `Il <span class="num">${d}</span> è contenuto nel <span class="num">${dd}</span> quante volte?`,
-    `Se conti a salti di <span class="num">${d}</span>, quanti salti servono per arrivare a <span class="num">${dd}</span>?`,
-  ];
-  return{type:'calc',badge:'🔢 Calcolo',cls:'badge-calc',
-    html:templates[ri(0,templates.length-1)],
-    options:opts.map(String),correct:String(q),
-    explain:`Il ${d} sta nel ${dd} esattamente ${q} volte, perché ${d} × ${q} = ${dd}`};
-}
-function qGruppi(){
-  const g=ri(2,8),p=ri(2,10),tot=g*p;
-  const scenarios=[
-    {obj:'caramelle',ctx:[
-      `Hai <span class="num">${tot}</span> caramelle da dividere in <span class="num">${g}</span> sacchetti uguali. Quante caramelle per sacchetto?`,
-      `Distribuisci <span class="num">${tot}</span> caramelle equamente tra <span class="num">${g}</span> bambini. Quante ne riceve ognuno?`,
-      `Metti <span class="num">${tot}</span> caramelle in <span class="num">${g}</span> barattoli uguali. Quante per barattolo?`,
-    ]},
-    {obj:'figurine',ctx:[
-      `Hai <span class="num">${tot}</span> figurine da dividere tra <span class="num">${g}</span> amici. Quante figurine a testa?`,
-      `Dividi <span class="num">${tot}</span> figurine in <span class="num">${g}</span> album uguali. Quante per album?`,
-    ]},
-    {obj:'matite',ctx:[
-      `Hai <span class="num">${tot}</span> matite da dividere in <span class="num">${g}</span> astucci uguali. Quante matite per astuccio?`,
-      `Distribuisci <span class="num">${tot}</span> matite su <span class="num">${g}</span> banchi. Quante per banco?`,
-    ]},
-    {obj:'biscotti',ctx:[
-      `Hai sfornato <span class="num">${tot}</span> biscotti e li metti in <span class="num">${g}</span> piatti uguali. Quanti per piatto?`,
-      `Dividi <span class="num">${tot}</span> biscotti tra <span class="num">${g}</span> compagni. Quanti ne prende ognuno?`,
-    ]},
-    {obj:'adesivi',ctx:[
-      `Hai <span class="num">${tot}</span> adesivi da dividere su <span class="num">${g}</span> pagine. Quanti adesivi per pagina?`,
-      `Distribuisci <span class="num">${tot}</span> adesivi tra <span class="num">${g}</span> quaderni. Quanti per quaderno?`,
-    ]},
-    {obj:'pennarelli',ctx:[
-      `Metti <span class="num">${tot}</span> pennarelli in <span class="num">${g}</span> scatole uguali. Quanti per scatola?`,
-    ]},
-    {obj:'biglie',ctx:[
-      `Hai <span class="num">${tot}</span> biglie e le dividi in <span class="num">${g}</span> sacchetti uguali. Quante biglie per sacchetto?`,
-      `Distribuisci <span class="num">${tot}</span> biglie equamente tra <span class="num">${g}</span> giocatori. Quante a testa?`,
-    ]},
-    {obj:'stelle',ctx:[
-      `La maestra ha <span class="num">${tot}</span> stelle da dare a <span class="num">${g}</span> bambini in parti uguali. Quante stelle a testa?`,
-    ]},
-    {obj:'palloncini',ctx:[
-      `Per la festa ci sono <span class="num">${tot}</span> palloncini da dividere in <span class="num">${g}</span> mazzi uguali. Quanti per mazzo?`,
-    ]},
-    {obj:'libri',ctx:[
-      `La biblioteca ha <span class="num">${tot}</span> libri da sistemare in <span class="num">${g}</span> scaffali uguali. Quanti libri per scaffale?`,
-      `Distribuisci <span class="num">${tot}</span> libri tra <span class="num">${g}</span> studenti. Quanti libri a testa?`,
-    ]},
-    {obj:'fiori',ctx:[
-      `Il fioraio ha <span class="num">${tot}</span> fiori da mettere in <span class="num">${g}</span> vasi uguali. Quanti fiori per vaso?`,
-      `Prepara <span class="num">${g}</span> mazzi uguali con <span class="num">${tot}</span> fiori. Quanti fiori per mazzo?`,
-    ]},
-    {obj:'cioccolatini',ctx:[
-      `Ci sono <span class="num">${tot}</span> cioccolatini da dividere tra <span class="num">${g}</span> persone. Quanti cioccolatini a testa?`,
-    ]},
-    {obj:'perline',ctx:[
-      `Hai <span class="num">${tot}</span> perline per fare <span class="num">${g}</span> braccialetti uguali. Quante perline per braccialetto?`,
-    ]},
-    {obj:'francobolli',ctx:[
-      `Dividi <span class="num">${tot}</span> francobolli in <span class="num">${g}</span> buste uguali. Quanti per busta?`,
-    ]},
-    {obj:'foto',ctx:[
-      `Metti <span class="num">${tot}</span> foto in <span class="num">${g}</span> cornici, con lo stesso numero per cornice. Quante foto per cornice?`,
-    ]},
-    {obj:'bottoni',ctx:[
-      `Hai <span class="num">${tot}</span> bottoni da cucire su <span class="num">${g}</span> magliette. Quanti bottoni per maglietta?`,
-    ]},
-    {obj:'monete',ctx:[
-      `Dividi <span class="num">${tot}</span> monete in <span class="num">${g}</span> pile uguali. Quante monete per pila?`,
-    ]},
-    {obj:'pezzi di puzzle',ctx:[
-      `Un puzzle ha <span class="num">${tot}</span> pezzi e <span class="num">${g}</span> bambini se li dividono. Quanti pezzi a testa?`,
-    ]},
-  ];
-  const sc=scenarios[ri(0,scenarios.length-1)];
-  const text=sc.ctx[ri(0,sc.ctx.length-1)];
-  const opts=shuffle([p,...wrongAnswers(p,3,1,12)]);
-  return{type:'brain',badge:'🧠 Ragionamento',cls:'badge-brain',
-    html:text,options:opts.map(String),correct:String(p),
-    explain:`${tot} ÷ ${g} = ${p} ${sc.obj} per gruppo`};
-}
-function qInversa(){
-  const d=ri(2,10),q=ri(2,10),dd=d*q;
-  const v=ri(0,1);
-  let html,correct,explain;
-  if(v===0){correct=dd;
-    const t=[
-      `<span class="num">?</span> <span class="op">÷</span> <span class="num">${d}</span> <span class="op">=</span> <span class="num">${q}</span>`,
-      `Quale numero diviso <span class="num">${d}</span> dà <span class="num">${q}</span>?`,
-      `Trova il numero: ? ÷ ${d} = ${q}`,
-    ];html=t[ri(0,t.length-1)];
-    explain=`? = ${d} × ${q} = ${dd}`}
-  else{correct=d;
-    const t=[
-      `<span class="num">${dd}</span> <span class="op">÷</span> <span class="num">?</span> <span class="op">=</span> <span class="num">${q}</span>`,
-      `Per quale numero devi dividere <span class="num">${dd}</span> per ottenere <span class="num">${q}</span>?`,
-      `Trova il divisore: ${dd} ÷ ? = ${q}`,
-    ];html=t[ri(0,t.length-1)];
-    explain=`? = ${dd} ÷ ${q} = ${d}`}
-  const opts=shuffle([correct,...wrongAnswers(correct,3,2,Math.max(correct+5,15))]);
-  return{type:'calc',badge:'🔢 Calcolo',cls:'badge-calc',html,options:opts.map(String),correct:String(correct),explain};
-}
+function qNumericDiv(){var d=ri(2,10),q=ri(1,10),dd=d*q;var opts=shuffle([q].concat(wrongAnswers(q,3,1,12)));var templates=['<span class="num">'+dd+'</span> <span class="op">÷</span> <span class="num">'+d+'</span> <span class="op">=</span> <span class="num">?</span>','Quanto fa <span class="num">'+dd+'</span> <span class="op">÷</span> <span class="num">'+d+'</span>?','Calcola: <span class="num">'+dd+'</span> diviso <span class="num">'+d+'</span>'];return{type:'calc',badge:'🔢 Calcolo',cls:'badge-calc',html:templates[ri(0,2)],options:opts.map(String),correct:String(q),explain:dd+' ÷ '+d+' = '+q+', perché '+d+' × '+q+' = '+dd}}
 
-// NEW: Double division chain
-function qCatena(){
-  const x=ri(2,6),y=ri(2,6),z=ri(2,4);
-  const num=x*y*z;
-  const mid=num/x;
-  const opts=shuffle([z,...wrongAnswers(z,3,1,12)]);
-  return{type:'calc',badge:'🔢 Calcolo',cls:'badge-calc',
-    html:`<span class="num">${num}</span> <span class="op">÷</span> <span class="num">${x}</span> <span class="op">÷</span> <span class="num">${y}</span> <span class="op">=</span> <span class="num">?</span>`,
-    options:opts.map(String),correct:String(z),
-    explain:`Prima: ${num} ÷ ${x} = ${mid}, poi: ${mid} ÷ ${y} = ${z}`};
-}
+function qQuanteVolte(){var d=ri(2,10),q=ri(1,10),dd=d*q;var opts=shuffle([q].concat(wrongAnswers(q,3,1,12)));var templates=['Quante volte il <span class="num">'+d+'</span> sta nel <span class="num">'+dd+'</span>?','Quante volte entra il <span class="num">'+d+'</span> nel <span class="num">'+dd+'</span>?','Se conti a salti di <span class="num">'+d+'</span>, quanti salti servono per arrivare a <span class="num">'+dd+'</span>?'];return{type:'calc',badge:'🔢 Calcolo',cls:'badge-calc',html:templates[ri(0,2)],options:opts.map(String),correct:String(q),explain:'Il '+d+' sta nel '+dd+' esattamente '+q+' volte'}}
 
-// NEW: "Which division is correct?" (pick the right equation)
-function qQualeCorretta(){
-  const d=ri(2,10),q=ri(2,10),dd=d*q;
-  const correct=`${dd} ÷ ${d} = ${q}`;
-  const wrongs=[];
-  // Generate plausible wrong equations
-  const fakes=[
-    `${dd} ÷ ${d} = ${q+ri(1,3)}`,
-    `${dd} ÷ ${q} = ${d+ri(1,2)}`,
-    `${dd+d} ÷ ${d} = ${q}`,
-    `${dd} ÷ ${d+1} = ${q}`,
-    `${d*q+d} ÷ ${d} = ${q}`,
-    `${dd} ÷ ${d} = ${q*2}`,
-  ];
-  shuffle(fakes).slice(0,3).forEach(f=>wrongs.push(f));
-  const opts=shuffle([correct,...wrongs]);
-  return{type:'trap',badge:'⚡ Trappola!',cls:'badge-trap',
-    html:`Quale di queste divisioni è <strong>corretta</strong>?`,
-    options:opts,correct,explain:`${dd} ÷ ${d} = ${q} perché ${d} × ${q} = ${dd}`,isText:true};
-}
+function qGruppi(){var g=ri(2,8),p=ri(2,10),tot=g*p;var items=[{o:'caramelle',t:['Hai <span class="num">%t</span> caramelle da dividere in <span class="num">%g</span> sacchetti uguali. Quante per sacchetto?','Distribuisci <span class="num">%t</span> caramelle tra <span class="num">%g</span> bambini. Quante a testa?']},{o:'figurine',t:['Hai <span class="num">%t</span> figurine da dividere tra <span class="num">%g</span> amici. Quante a testa?']},{o:'matite',t:['Hai <span class="num">%t</span> matite da mettere in <span class="num">%g</span> astucci uguali. Quante per astuccio?']},{o:'biscotti',t:['Hai sfornato <span class="num">%t</span> biscotti e li metti in <span class="num">%g</span> piatti uguali. Quanti per piatto?']},{o:'biglie',t:['Hai <span class="num">%t</span> biglie da dividere in <span class="num">%g</span> sacchetti. Quante per sacchetto?']},{o:'libri',t:['La biblioteca ha <span class="num">%t</span> libri da mettere in <span class="num">%g</span> scaffali uguali. Quanti per scaffale?']},{o:'fiori',t:['Il fioraio ha <span class="num">%t</span> fiori da mettere in <span class="num">%g</span> vasi uguali. Quanti per vaso?']},{o:'perline',t:['Hai <span class="num">%t</span> perline per fare <span class="num">%g</span> braccialetti uguali. Quante per braccialetto?']},{o:'cioccolatini',t:['Ci sono <span class="num">%t</span> cioccolatini da dividere tra <span class="num">%g</span> persone. Quanti a testa?']},{o:'monete',t:['Dividi <span class="num">%t</span> monete in <span class="num">%g</span> pile uguali. Quante per pila?']},{o:'palloncini',t:['Per la festa ci sono <span class="num">%t</span> palloncini da dividere in <span class="num">%g</span> mazzi uguali. Quanti per mazzo?']},{o:'stelle',t:['La maestra ha <span class="num">%t</span> stelle da dare a <span class="num">%g</span> bambini in parti uguali. Quante a testa?']}];var it=items[ri(0,items.length-1)];var txt=it.t[ri(0,it.t.length-1)].replace(/%t/g,tot).replace(/%g/g,g);var opts=shuffle([p].concat(wrongAnswers(p,3,1,12)));return{type:'brain',badge:'🧠 Ragionamento',cls:'badge-brain',html:txt,options:opts.map(String),correct:String(p),explain:tot+' ÷ '+g+' = '+p+' '+it.o+' per gruppo'}}
 
-// NEW: Word problem — "how many groups?"
-function qQuantiGruppi(){
-  const perGroup=ri(2,10),groups=ri(2,8),tot=perGroup*groups;
-  const objs=['bambini','sedie','mele','uova','biscotti','giocattoli','palline','foglietti','carte','mattoncini'];
-  const contPairs=[
-    {s:'fila',p:'file',q:'e'},
-    {s:'squadra',p:'squadre',q:'e'},
-    {s:'scatola',p:'scatole',q:'e'},
-    {s:'gruppo',p:'gruppi',q:'i'},
-    {s:'tavolo',p:'tavoli',q:'i'},
-    {s:'cestino',p:'cestini',q:'i'},
-    {s:'sacchetto',p:'sacchetti',q:'i'},
-    {s:'riga',p:'righe',q:'e'},
-    {s:'coppia',p:'coppie',q:'e'},
-  ];
-  const obj=objs[ri(0,objs.length-1)];
-  const c=contPairs[ri(0,contPairs.length-1)];
-  const templates=[
-    `Hai <span class="num">${tot}</span> ${obj}. Se ne metti <span class="num">${perGroup}</span> in ogni ${c.s}, quant${c.q} ${c.p} ti servono?`,
-    `Ci sono <span class="num">${tot}</span> ${obj} da mettere in ${c.p} da <span class="num">${perGroup}</span>. Quant${c.q} ${c.p} servono?`,
-    `Se ogni ${c.s} contiene <span class="num">${perGroup}</span> ${obj}, quant${c.q} ${c.p} servono per <span class="num">${tot}</span> ${obj}?`,
-  ];
-  const opts=shuffle([groups,...wrongAnswers(groups,3,1,12)]);
-  return{type:'brain',badge:'🧠 Ragionamento',cls:'badge-brain',
-    html:templates[ri(0,templates.length-1)],
-    options:opts.map(String),correct:String(groups),
-    explain:`${tot} ÷ ${perGroup} = ${groups} ${c.p}`};
-}
+function qInversa(){var d=ri(2,10),q=ri(2,10),dd=d*q;var v=ri(0,1);var html,correct,explain;if(v===0){correct=dd;html='Quale numero diviso <span class="num">'+d+'</span> dà <span class="num">'+q+'</span>?';explain='? = '+d+' × '+q+' = '+dd}else{correct=d;html='Per quale numero devi dividere <span class="num">'+dd+'</span> per ottenere <span class="num">'+q+'</span>?';explain='? = '+dd+' ÷ '+q+' = '+d}var opts=shuffle([correct].concat(wrongAnswers(correct,3,2,Math.max(correct+5,15))));return{type:'calc',badge:'🔢 Calcolo',cls:'badge-calc',html:html,options:opts.map(String),correct:String(correct),explain:explain}}
 
-// NEW: Comparison — which is bigger?
-function qConfronto(){
-  const d1=ri(2,10),q1=ri(2,10),dd1=d1*q1;
-  let d2,q2,dd2;
-  do{d2=ri(2,10);q2=ri(2,10);dd2=d2*q2}while(q1===q2);
-  const bigger=q1>q2?`${dd1} ÷ ${d1}`:`${dd2} ÷ ${d2}`;
-  const smaller=q1>q2?`${dd2} ÷ ${d2}`:`${dd1} ÷ ${d1}`;
-  const same1=`Sono uguali`;
-  const fakeDiv=`${ri(10,50)} ÷ ${ri(2,8)}`;
-  const opts=shuffle([bigger,smaller,same1,fakeDiv]);
-  return{type:'brain',badge:'🧠 Ragionamento',cls:'badge-brain',
-    html:`Quale di queste divisioni dà il numero più grande?`,
-    options:opts,correct:bigger,
-    explain:`${dd1} ÷ ${d1} = ${q1} e ${dd2} ÷ ${d2} = ${q2}. Quindi ${Math.max(q1,q2)} è il risultato più grande!`,isText:true};
-}
+function qCatena(){var x=ri(2,6),y=ri(2,6),z=ri(2,4);var num=x*y*z;var mid=num/x;var opts=shuffle([z].concat(wrongAnswers(z,3,1,12)));return{type:'calc',badge:'🔢 Calcolo',cls:'badge-calc',html:'<span class="num">'+num+'</span> <span class="op">÷</span> <span class="num">'+x+'</span> <span class="op">÷</span> <span class="num">'+y+'</span> <span class="op">=</span> <span class="num">?</span>',options:opts.map(String),correct:String(z),explain:'Prima: '+num+' ÷ '+x+' = '+mid+', poi: '+mid+' ÷ '+y+' = '+z}}
 
-// NEW: "Quanti ne restano?" (division with context of taking away groups)
-function qQuantiRestano(){
-  const d=ri(2,8),q=ri(2,8),tot=d*q;
-  const taken=ri(1,q-1);
-  const remaining=(q-taken)*d;
-  const items=[
-    {name:'mele',g:'f'},{name:'figurine',g:'f'},{name:'caramelle',g:'f'},
-    {name:'matite',g:'f'},{name:'palline',g:'f'},
-    {name:'biscotti',g:'m'},{name:'palloncini',g:'m'},
-    {name:'adesivi',g:'m'},{name:'cioccolatini',g:'m'},
-  ];
-  const it=items[ri(0,items.length-1)];
-  const divise=it.g==='f'?'divise':'divisi';
-  const quante=it.g==='f'?'quante':'quanti';
-  const opts=shuffle([remaining,...wrongAnswers(remaining,3,1,tot)]);
-  return{type:'brain',badge:'🧠 Ragionamento',cls:'badge-brain',
-    html:`Hai <span class="num">${tot}</span> ${it.name} ${divise} in <span class="num">${q}</span> gruppi uguali. Se togli <span class="num">${taken}</span> gruppi, ${quante} ${it.name} rimangono?`,
-    options:opts.map(String),correct:String(remaining),
-    explain:`Ogni gruppo ha ${tot} ÷ ${q} = ${d} ${it.name}. Togli ${taken} gruppi: rimangono ${q-taken} × ${d} = ${remaining}`};
-}
+function qQualeCorretta(){var d=ri(2,10),q=ri(2,10),dd=d*q;var correct=dd+' ÷ '+d+' = '+q;var fakes=shuffle([dd+' ÷ '+d+' = '+(q+ri(1,3)),dd+' ÷ '+q+' = '+(d+ri(1,2)),(dd+d)+' ÷ '+d+' = '+q,dd+' ÷ '+(d+1)+' = '+q,dd+' ÷ '+d+' = '+(q*2)]).slice(0,3);var opts=shuffle([correct].concat(fakes));return{type:'trap',badge:'⚡ Trappola!',cls:'badge-trap',html:'Quale di queste divisioni è <strong>corretta</strong>?',options:opts,correct:correct,explain:dd+' ÷ '+d+' = '+q+' perché '+d+' × '+q+' = '+dd,isText:true}}
 
-function qMoltODiv(){
-  const pool=[
-    // DIVISIONI
-    {text:'Hai 24 biscotti e li dividi tra 6 amici. Che operazione fai?',correct:'Divisione: 24 ÷ 6',wrong:['Moltiplicazione: 24 × 6','Divisione: 6 ÷ 24','Addizione: 24 + 6'],explain:'Dividi in parti uguali → DIVISIONE! 24 ÷ 6 = 4'},
-    {text:'Ci sono 30 matite da mettere in scatole da 5. Quante scatole servono?',correct:'Divisione: 30 ÷ 5',wrong:['Moltiplicazione: 30 × 5','Divisione: 5 ÷ 30','Addizione: 30 + 5'],explain:'Dividi in gruppi → DIVISIONE! 30 ÷ 5 = 6'},
-    {text:'Ci sono 40 posti da distribuire in 8 file uguali. Quanti posti per fila?',correct:'Divisione: 40 ÷ 8',wrong:['Moltiplicazione: 40 × 8','Divisione: 8 ÷ 40','Addizione: 40 + 8'],explain:'Distribuisci → DIVISIONE! 40 ÷ 8 = 5'},
-    {text:'Ci sono 56 bambini da dividere in 7 squadre uguali. Quanti bambini per squadra?',correct:'Divisione: 56 ÷ 7',wrong:['Moltiplicazione: 56 × 7','Divisione: 7 ÷ 56','Addizione: 56 + 7'],explain:'Distribuisci → DIVISIONE! 56 ÷ 7 = 8'},
-    {text:'Hai 48 fiori da mettere in 6 vasi uguali. Quanti fiori per vaso?',correct:'Divisione: 48 ÷ 6',wrong:['Moltiplicazione: 48 × 6','Divisione: 6 ÷ 48','Addizione: 48 + 6'],explain:'Distribuisci → DIVISIONE! 48 ÷ 6 = 8'},
-    {text:'Hai 36 fragole da dividere tra 4 bambini. Che operazione fai?',correct:'Divisione: 36 ÷ 4',wrong:['Moltiplicazione: 36 × 4','Divisione: 4 ÷ 36','Addizione: 36 + 4'],explain:'Dividi equamente → DIVISIONE! 36 ÷ 4 = 9'},
-    {text:'Hai 45 adesivi da mettere in 9 pagine uguali. Che operazione fai?',correct:'Divisione: 45 ÷ 9',wrong:['Moltiplicazione: 45 × 9','Divisione: 9 ÷ 45','Addizione: 45 + 9'],explain:'Distribuisci in parti uguali → DIVISIONE! 45 ÷ 9 = 5'},
-    {text:'La maestra divide 32 fogli tra 8 studenti. Che operazione fa?',correct:'Divisione: 32 ÷ 8',wrong:['Moltiplicazione: 32 × 8','Divisione: 8 ÷ 32','Addizione: 32 + 8'],explain:'Divide in parti uguali → DIVISIONE! 32 ÷ 8 = 4'},
-    {text:'Ci sono 63 carte da gioco da dividere tra 9 giocatori. Che operazione fai?',correct:'Divisione: 63 ÷ 9',wrong:['Moltiplicazione: 63 × 9','Divisione: 9 ÷ 63','Addizione: 63 + 9'],explain:'Distribuisci → DIVISIONE! 63 ÷ 9 = 7'},
-    {text:'Ci sono 54 pezzi di Lego da mettere in 6 scatole uguali. Quanti per scatola?',correct:'Divisione: 54 ÷ 6',wrong:['Moltiplicazione: 54 × 6','Divisione: 6 ÷ 54','Addizione: 54 + 6'],explain:'Distribuisci → DIVISIONE! 54 ÷ 6 = 9'},
-    {text:'Il nonno divide 28 noci tra 7 nipoti. Che operazione fa?',correct:'Divisione: 28 ÷ 7',wrong:['Moltiplicazione: 28 × 7','Divisione: 7 ÷ 28','Addizione: 28 + 7'],explain:'Divide → DIVISIONE! 28 ÷ 7 = 4'},
-    {text:'Hai 50 biglie da mettere in 10 sacchetti. Che operazione fai?',correct:'Divisione: 50 ÷ 10',wrong:['Moltiplicazione: 50 × 10','Divisione: 10 ÷ 50','Addizione: 50 + 10'],explain:'Distribuisci → DIVISIONE! 50 ÷ 10 = 5'},
-    {text:'Un nastro di 72 cm va tagliato in 8 pezzi uguali. Che operazione fai?',correct:'Divisione: 72 ÷ 8',wrong:['Moltiplicazione: 72 × 8','Divisione: 8 ÷ 72','Sottrazione: 72 - 8'],explain:'Tagli in parti uguali → DIVISIONE! 72 ÷ 8 = 9 cm'},
-    {text:'Ci sono 20 pesciolini da mettere in 4 vaschette uguali. Quanti per vaschetta?',correct:'Divisione: 20 ÷ 4',wrong:['Moltiplicazione: 20 × 4','Divisione: 4 ÷ 20','Addizione: 20 + 4'],explain:'Distribuisci → DIVISIONE! 20 ÷ 4 = 5'},
-    {text:'Una torta ha 18 fette da dividere tra 3 tavoli. Quante fette per tavolo?',correct:'Divisione: 18 ÷ 3',wrong:['Moltiplicazione: 18 × 3','Divisione: 3 ÷ 18','Addizione: 18 + 3'],explain:'Distribuisci → DIVISIONE! 18 ÷ 3 = 6'},
-    // MOLTIPLICAZIONI
-    {text:'Ogni bambino ha 5 figurine, ci sono 4 bambini. Quante figurine in totale?',correct:'Moltiplicazione: 5 × 4',wrong:['Divisione: 5 ÷ 4','Divisione: 20 ÷ 4','Sottrazione: 5 - 4'],explain:'Ripeti la stessa quantità → MOLTIPLICAZIONE! 5 × 4 = 20'},
-    {text:'Leggi 3 pagine al giorno per 7 giorni. Quante pagine?',correct:'Moltiplicazione: 3 × 7',wrong:['Divisione: 7 ÷ 3','Divisione: 3 ÷ 7','Sottrazione: 7 - 3'],explain:'Ripeti per più giorni → MOLTIPLICAZIONE! 3 × 7 = 21'},
-    {text:'Ci sono 6 sacchetti con 9 caramelle ciascuno. Quante caramelle in totale?',correct:'Moltiplicazione: 6 × 9',wrong:['Divisione: 54 ÷ 6','Divisione: 9 ÷ 6','Sottrazione: 9 - 6'],explain:'Ripeti per ogni sacchetto → MOLTIPLICAZIONE! 6 × 9 = 54'},
-    {text:'Un treno ha 9 vagoni con 8 posti ciascuno. Quanti posti in totale?',correct:'Moltiplicazione: 9 × 8',wrong:['Divisione: 72 ÷ 9','Divisione: 9 ÷ 8','Addizione: 9 + 8'],explain:'Ripeti per ogni vagone → MOLTIPLICAZIONE! 9 × 8 = 72'},
-    {text:'Ci sono 7 amici e ognuno porta 4 libri. Quanti libri in totale?',correct:'Moltiplicazione: 7 × 4',wrong:['Divisione: 28 ÷ 7','Divisione: 7 ÷ 4','Sottrazione: 7 - 4'],explain:'Ripeti per ogni amico → MOLTIPLICAZIONE! 7 × 4 = 28'},
-    {text:'Ci sono 8 file di sedie con 6 sedie per fila. Quante sedie?',correct:'Moltiplicazione: 8 × 6',wrong:['Divisione: 48 ÷ 8','Divisione: 8 ÷ 6','Addizione: 8 + 6'],explain:'Ripeti per ogni fila → MOLTIPLICAZIONE! 8 × 6 = 48'},
-    {text:'Ogni scatola ha 10 pastelli. Hai 3 scatole. Quanti pastelli in totale?',correct:'Moltiplicazione: 10 × 3',wrong:['Divisione: 30 ÷ 10','Divisione: 10 ÷ 3','Addizione: 10 + 3'],explain:'Ripeti per ogni scatola → MOLTIPLICAZIONE! 10 × 3 = 30'},
-    {text:'Un ragno ha 8 zampe. Quante zampe hanno 5 ragni?',correct:'Moltiplicazione: 8 × 5',wrong:['Divisione: 40 ÷ 8','Divisione: 8 ÷ 5','Addizione: 8 + 5'],explain:'Ripeti per ogni ragno → MOLTIPLICAZIONE! 8 × 5 = 40'},
-    {text:'Mangi 2 mele al giorno per 9 giorni. Quante mele?',correct:'Moltiplicazione: 2 × 9',wrong:['Divisione: 18 ÷ 2','Divisione: 9 ÷ 2','Addizione: 2 + 9'],explain:'Ripeti per più giorni → MOLTIPLICAZIONE! 2 × 9 = 18'},
-    {text:'Ogni classe ha 7 banchi. Ci sono 4 classi. Quanti banchi in totale?',correct:'Moltiplicazione: 7 × 4',wrong:['Divisione: 28 ÷ 7','Divisione: 7 ÷ 4','Addizione: 7 + 4'],explain:'Ripeti per ogni classe → MOLTIPLICAZIONE! 7 × 4 = 28'},
-    {text:'Un treno parte ogni 6 minuti. Quanti treni in 60 minuti?',correct:'Divisione: 60 ÷ 6',wrong:['Moltiplicazione: 60 × 6','Divisione: 6 ÷ 60','Sottrazione: 60 - 6'],explain:'Dividi il tempo totale → DIVISIONE! 60 ÷ 6 = 10 treni'},
-    {text:'Hai 5 cesti con 7 mele ciascuno. Quante mele in totale?',correct:'Moltiplicazione: 5 × 7',wrong:['Divisione: 35 ÷ 5','Divisione: 5 ÷ 7','Addizione: 5 + 7'],explain:'Ripeti → MOLTIPLICAZIONE! 5 × 7 = 35'},
-    {text:'Ogni piano di un palazzo ha 4 appartamenti. Il palazzo ha 6 piani. Quanti appartamenti?',correct:'Moltiplicazione: 4 × 6',wrong:['Divisione: 24 ÷ 4','Divisione: 4 ÷ 6','Addizione: 4 + 6'],explain:'Ripeti per ogni piano → MOLTIPLICAZIONE! 4 × 6 = 24'},
-    {text:'Guadagni 3 punti per ogni stella. Hai raccolto 9 stelle. Quanti punti?',correct:'Moltiplicazione: 3 × 9',wrong:['Divisione: 27 ÷ 3','Divisione: 9 ÷ 3','Addizione: 3 + 9'],explain:'Ripeti per ogni stella → MOLTIPLICAZIONE! 3 × 9 = 27'},
-    {text:'Un parcheggio ha 10 file da 8 posti. Quanti posti in totale?',correct:'Moltiplicazione: 10 × 8',wrong:['Divisione: 80 ÷ 10','Divisione: 10 ÷ 8','Addizione: 10 + 8'],explain:'Ripeti per ogni fila → MOLTIPLICAZIONE! 10 × 8 = 80'},
-  ];
-  const s=pool[ri(0,pool.length-1)];
-  const opts=shuffle([s.correct,...s.wrong.slice(0,3)]);
-  return{type:'brain',badge:'🧠 Ragionamento',cls:'badge-brain',html:s.text,options:opts,correct:s.correct,explain:s.explain,isText:true};
-}
-function qTrappola(){
-  const traps=[
-    {text:'Quale operazione dà come risultato <span class="num">6</span>?',correct:'42 ÷ 7',wrong:['42 × 7','6 × 7','36 ÷ 7'],explain:'42 ÷ 7 = 6. Attenzione: 6 × 7 = 42, non 6!'},
-    {text:'Quale operazione dà come risultato <span class="num">8</span>?',correct:'56 ÷ 7',wrong:['56 × 7','7 × 8','64 ÷ 7'],explain:'56 ÷ 7 = 8. 7 × 8 = 56, risultato diverso!'},
-    {text:'Quale operazione dà come risultato <span class="num">5</span>?',correct:'45 ÷ 9',wrong:['45 × 9','5 × 9','50 ÷ 9'],explain:'45 ÷ 9 = 5. 5 × 9 = 45, non 5!'},
-    {text:'Quale operazione dà come risultato <span class="num">9</span>?',correct:'72 ÷ 8',wrong:['72 × 8','8 × 9','81 ÷ 8'],explain:'72 ÷ 8 = 9. 8 × 9 = 72, non 9!'},
-    {text:'Quale operazione dà come risultato <span class="num">4</span>?',correct:'36 ÷ 9',wrong:['36 × 9','4 × 9','32 ÷ 9'],explain:'36 ÷ 9 = 4. 4 × 9 = 36, non 4!'},
-    {text:'Quale operazione dà come risultato <span class="num">7</span>?',correct:'63 ÷ 9',wrong:['63 × 9','7 × 9','70 ÷ 9'],explain:'63 ÷ 9 = 7. 7 × 9 = 63, non 7!'},
-    {text:'Quale operazione dà come risultato <span class="num">3</span>?',correct:'27 ÷ 9',wrong:['27 × 9','3 × 9','30 ÷ 9'],explain:'27 ÷ 9 = 3. 3 × 9 = 27, non 3!'},
-    {text:'Quale operazione dà come risultato <span class="num">10</span>?',correct:'80 ÷ 8',wrong:['80 × 8','10 × 8','90 ÷ 8'],explain:'80 ÷ 8 = 10. 10 × 8 = 80, non 10!'},
-    {text:'Quale operazione dà come risultato <span class="num">6</span>?',correct:'54 ÷ 9',wrong:['54 × 9','6 × 9','60 ÷ 9'],explain:'54 ÷ 9 = 6. 6 × 9 = 54, non 6!'},
-    {text:'Quale operazione dà come risultato <span class="num">4</span>?',correct:'28 ÷ 7',wrong:['28 × 7','4 × 7','24 ÷ 7'],explain:'28 ÷ 7 = 4. 4 × 7 = 28, non 4!'},
-    {text:'Quale operazione dà come risultato <span class="num">5</span>?',correct:'35 ÷ 7',wrong:['35 × 7','5 × 7','40 ÷ 7'],explain:'35 ÷ 7 = 5. 5 × 7 = 35, non 5!'},
-    {text:'Quale operazione dà come risultato <span class="num">8</span>?',correct:'48 ÷ 6',wrong:['48 × 6','8 × 6','54 ÷ 6'],explain:'48 ÷ 6 = 8. 8 × 6 = 48, non 8!'},
-    {text:'Quale operazione dà come risultato <span class="num">3</span>?',correct:'24 ÷ 8',wrong:['24 × 8','3 × 8','27 ÷ 8'],explain:'24 ÷ 8 = 3. 3 × 8 = 24, non 3!'},
-    {text:'Quale operazione dà come risultato <span class="num">7</span>?',correct:'49 ÷ 7',wrong:['49 × 7','7 × 7','56 ÷ 7'],explain:'49 ÷ 7 = 7. Qui il risultato è uguale al divisore!'},
-    {text:'Quale operazione dà come risultato <span class="num">9</span>?',correct:'81 ÷ 9',wrong:['81 × 9','9 × 9','90 ÷ 9'],explain:'81 ÷ 9 = 9. 9 × 9 = 81, non 9!'},
-    {text:'Quale operazione dà come risultato <span class="num">2</span>?',correct:'16 ÷ 8',wrong:['16 × 8','2 × 8','18 ÷ 8'],explain:'16 ÷ 8 = 2. 2 × 8 = 16, non 2!'},
-    {text:'Quale operazione dà come risultato <span class="num">6</span>?',correct:'36 ÷ 6',wrong:['36 × 6','6 × 6','42 ÷ 6'],explain:'36 ÷ 6 = 6. Qui il divisore e il risultato sono uguali!'},
-    {text:'Quale operazione dà come risultato <span class="num">10</span>?',correct:'70 ÷ 7',wrong:['70 × 7','10 × 7','77 ÷ 7'],explain:'70 ÷ 7 = 10. 10 × 7 = 70, non 10!'},
-    {text:'Quale operazione dà come risultato <span class="num">4</span>?',correct:'20 ÷ 5',wrong:['20 × 5','4 × 5','25 ÷ 5'],explain:'20 ÷ 5 = 4. 4 × 5 = 20, non 4!'},
-    {text:'Quale operazione dà come risultato <span class="num">8</span>?',correct:'64 ÷ 8',wrong:['64 × 8','8 × 8','72 ÷ 8'],explain:'64 ÷ 8 = 8. Qui il divisore e il risultato sono uguali!'},
-  ];
-  const t=traps[ri(0,traps.length-1)];
-  const opts=shuffle([t.correct,...t.wrong.slice(0,3)]);
-  return{type:'trap',badge:'⚡ Trappola!',cls:'badge-trap',html:t.text,options:opts,correct:t.correct,explain:t.explain,isText:true};
-}
+function qQuantiGruppi(){var pg=ri(2,10),gr=ri(2,8),tot=pg*gr;var cp=[{s:'fila',p:'file',q:'e'},{s:'squadra',p:'squadre',q:'e'},{s:'scatola',p:'scatole',q:'e'},{s:'gruppo',p:'gruppi',q:'i'},{s:'tavolo',p:'tavoli',q:'i'},{s:'sacchetto',p:'sacchetti',q:'i'}];var objs=['bambini','sedie','mele','biscotti','palline','carte','mattoncini'];var obj=objs[ri(0,objs.length-1)];var c=cp[ri(0,cp.length-1)];var templates=['Hai <span class="num">'+tot+'</span> '+obj+'. Se ne metti <span class="num">'+pg+'</span> in ogni '+c.s+', quant'+c.q+' '+c.p+' ti servono?','Ci sono <span class="num">'+tot+'</span> '+obj+' da mettere in '+c.p+' da <span class="num">'+pg+'</span>. Quant'+c.q+' '+c.p+' servono?'];var opts=shuffle([gr].concat(wrongAnswers(gr,3,1,12)));return{type:'brain',badge:'🧠 Ragionamento',cls:'badge-brain',html:templates[ri(0,1)],options:opts.map(String),correct:String(gr),explain:tot+' ÷ '+pg+' = '+gr+' '+c.p}}
 
-// TRUE/FALSE generator — now with multiple question styles
-function qTrueFalse(){
-  const style=ri(0,3);
-  if(style<=1){
-    // Classic: is this division correct?
-    const d=ri(2,10),q=ri(1,10),dd=d*q;
-    const isTrue=ri(0,1)===1;
-    let shown,correct;
-    if(isTrue){shown=q;correct=true}
-    else{
-      let fake=q+ri(1,3)*(ri(0,1)?1:-1);
-      if(fake<=0)fake=q+ri(1,3);
-      if(fake===q)fake=q+1;
-      shown=fake;correct=false;
-    }
-    return{type:'tf',
-      html:`<span class="num">${dd}</span> <span class="op">÷</span> <span class="num">${d}</span> <span class="op">=</span> <span class="num">${shown}</span>`,
-      correct,explain:correct?`Esatto! ${dd} ÷ ${d} = ${shown}`:`No! ${dd} ÷ ${d} = ${q}, non ${shown}!`};
-  }else if(style===2){
-    // "X is bigger than Y" — true or false
-    const d1=ri(2,10),q1=ri(2,10),dd1=d1*q1;
-    const d2=ri(2,10),q2=ri(2,10),dd2=d2*q2;
-    if(q1===q2)return qTrueFalse(); // retry
-    const claimBigger=ri(0,1)===0;// claim first is bigger
-    const actuallyBigger=q1>q2;
-    const correct=claimBigger===actuallyBigger;
-    return{type:'tf',
-      html:`<span class="num">${dd1}</span> <span class="op">÷</span> <span class="num">${d1}</span> è più grande di <span class="num">${dd2}</span> <span class="op">÷</span> <span class="num">${d2}</span>`,
-      correct,explain:`${dd1} ÷ ${d1} = ${q1} e ${dd2} ÷ ${d2} = ${q2}. ${q1>q2?'Il primo':'Il secondo'} è più grande!`};
-  }else{
-    // "This is a division problem" — describe scenario, true/false
-    const isDivision=ri(0,1)===1;
-    let text,correct,explain;
-    if(isDivision){
-      const divScenarios=[
-        {t:'Dividere 20 mele tra 5 bambini è una divisione',e:'Dividere in parti uguali → divisione!'},
-        {t:'Per sapere quante figurine ha ogni amico, dividi il totale per il numero di amici',e:'Distribuire equamente = divisione!'},
-        {t:'Se hai 36 biscotti e fai 4 gruppi uguali, stai dividendo',e:'Fare gruppi uguali = divisione!'},
-        {t:'Per sapere quante sedie ci sono per fila, dividi il totale per il numero di file',e:'Distribuire in file uguali = divisione!'},
-        {t:'Scoprire quanti pezzi ci sono per scatola, partendo dal totale, è una divisione',e:'Dal totale alle parti = divisione!'},
-        {t:'Se hai 42 figurine e le dai a 7 amici in parti uguali, fai una divisione',e:'Parti uguali tra amici = divisione!'},
-      ];
-      const s=divScenarios[ri(0,divScenarios.length-1)];
-      text=s.t;correct=true;explain=s.e;
-    }else{
-      const multScenarios=[
-        {t:'Dividere 20 mele tra 5 bambini è una moltiplicazione',e:'Dividere in parti uguali → è una DIVISIONE, non una moltiplicazione!'},
-        {t:'Per trovare il totale di 5 scatole da 8 biscotti devi dividere',e:'Ripetere una quantità → è una MOLTIPLICAZIONE, non una divisione!'},
-        {t:'Se ogni bambino ha 3 giocattoli e i bambini sono 6, per trovare il totale devi dividere',e:'Per trovare il totale → MOLTIPLICHI, non dividi!'},
-        {t:'Per calcolare 7 × 4 devi dividere 7 per 4',e:'7 × 4 è una moltiplicazione, non una divisione!'},
-        {t:'Per contare le zampe di 6 gatti fai una divisione',e:'Ogni gatto ha 4 zampe, ripeti per 6 → MOLTIPLICAZIONE!'},
-        {t:'Se hai 8 amici e ognuno porta 3 dolci, per trovare il totale devi dividere',e:'Ripeti 3 per 8 volte → MOLTIPLICAZIONE!'},
-      ];
-      const s=multScenarios[ri(0,multScenarios.length-1)];
-      text=s.t;correct=false;explain=s.e;
-    }
-    return{type:'tf',html:text,correct,explain};
-  }
-}
+function qConfronto(){var d1=ri(2,10),q1=ri(2,10),dd1=d1*q1;var d2,q2,dd2;do{d2=ri(2,10);q2=ri(2,10);dd2=d2*q2}while(q1===q2);var bigger=q1>q2?dd1+' ÷ '+d1:dd2+' ÷ '+d2;var smaller=q1>q2?dd2+' ÷ '+d2:dd1+' ÷ '+d1;var opts=shuffle([bigger,smaller,'Sono uguali',ri(10,50)+' ÷ '+ri(2,8)]);return{type:'brain',badge:'🧠 Ragionamento',cls:'badge-brain',html:'Quale di queste divisioni dà il numero più grande?',options:opts,correct:bigger,explain:dd1+' ÷ '+d1+' = '+q1+' e '+dd2+' ÷ '+d2+' = '+q2+'. Quindi '+Math.max(q1,q2)+' è il risultato più grande!',isText:true}}
 
-// =============================================
-// BUILD QUESTION SETS
-// =============================================
-function buildClassica(){
-  const qs=[];
-  for(let i=0;i<3;i++)qs.push(qNumericDiv());
-  for(let i=0;i<2;i++)qs.push(qQuanteVolte());
-  for(let i=0;i<2;i++)qs.push(qGruppi());
-  for(let i=0;i<2;i++)qs.push(qMoltODiv());
-  for(let i=0;i<2;i++)qs.push(qTrappola());
-  qs.push(qInversa());
-  qs.push(qCatena());
-  qs.push(qQualeCorretta());
-  qs.push(qQuantiGruppi());
-  qs.push(qConfronto());
-  qs.push(qQuantiRestano());
-  return shuffle(qs).slice(0,15);
-}
-function buildBlitz(){
-  const qs=[];
-  const generators=[qNumericDiv,qQuanteVolte,qInversa,qTrappola,qCatena,qQualeCorretta,qQuantiGruppi];
-  for(let i=0;i<50;i++){
-    qs.push(generators[ri(0,generators.length-1)]());
-  }
-  return qs;
-}
-function buildVeroFalso(){
-  const qs=[];
-  for(let i=0;i<40;i++)qs.push(qTrueFalse());
-  return qs;
-}
-function buildBoss(){
-  const qs=[];
-  const generators=[qNumericDiv,qGruppi,qMoltODiv,qTrappola,qInversa,qCatena,qQualeCorretta,qQuantiGruppi,qConfronto,qQuantiRestano];
-  for(let i=0;i<15;i++){
-    qs.push(generators[ri(0,generators.length-1)]());
-  }
-  return shuffle(qs);
-}
+function qQuantiRestano(){var d=ri(2,8),q=ri(3,8),tot=d*q;var taken=ri(1,q-1);var rem=(q-taken)*d;var items=[{n:'mele',g:'f'},{n:'caramelle',g:'f'},{n:'figurine',g:'f'},{n:'matite',g:'f'},{n:'biscotti',g:'m'},{n:'cioccolatini',g:'m'},{n:'palloncini',g:'m'}];var it=items[ri(0,items.length-1)];var dv=it.g==='f'?'divise':'divisi';var qw=it.g==='f'?'quante':'quanti';var opts=shuffle([rem].concat(wrongAnswers(rem,3,1,tot)));return{type:'brain',badge:'🧠 Ragionamento',cls:'badge-brain',html:'Hai <span class="num">'+tot+'</span> '+it.n+' '+dv+' in <span class="num">'+q+'</span> gruppi uguali. Se togli <span class="num">'+taken+'</span> gruppi, '+qw+' '+it.n+' rimangono?',options:opts.map(String),correct:String(rem),explain:'Ogni gruppo ha '+tot+' ÷ '+q+' = '+d+' '+it.n+'. Togli '+taken+' gruppi: rimangono '+(q-taken)+' × '+d+' = '+rem}}
 
-// =============================================
-// GAME FLOW
-// =============================================
-function goToMenu(){
-  clearInterval(G.timerInterval);
-  document.getElementById('endScreen').classList.add('hidden');
-  document.getElementById('gameArea').classList.add('hidden');
-  document.getElementById('topbar').classList.add('hidden');
-  document.getElementById('modeSelect').classList.remove('hidden');
-  updateTopbar();
-}
+function qMoltODiv(){var pool=[{text:'Hai 24 biscotti e li dividi tra 6 amici. Che operazione fai?',correct:'Divisione: 24 ÷ 6',wrong:['Moltiplicazione: 24 × 6','Divisione: 6 ÷ 24','Addizione: 24 + 6'],explain:'Dividi in parti uguali → DIVISIONE! 24 ÷ 6 = 4'},{text:'Ci sono 30 matite da mettere in scatole da 5. Quante scatole servono?',correct:'Divisione: 30 ÷ 5',wrong:['Moltiplicazione: 30 × 5','Divisione: 5 ÷ 30','Addizione: 30 + 5'],explain:'Dividi in gruppi → DIVISIONE! 30 ÷ 5 = 6'},{text:'Ci sono 40 posti da distribuire in 8 file uguali. Quanti posti per fila?',correct:'Divisione: 40 ÷ 8',wrong:['Moltiplicazione: 40 × 8','Divisione: 8 ÷ 40','Addizione: 40 + 8'],explain:'Distribuisci → DIVISIONE! 40 ÷ 8 = 5'},{text:'Ci sono 56 bambini da dividere in 7 squadre uguali. Quanti per squadra?',correct:'Divisione: 56 ÷ 7',wrong:['Moltiplicazione: 56 × 7','Divisione: 7 ÷ 56','Addizione: 56 + 7'],explain:'Distribuisci → DIVISIONE! 56 ÷ 7 = 8'},{text:'Hai 36 fragole da dividere tra 4 bambini. Che operazione fai?',correct:'Divisione: 36 ÷ 4',wrong:['Moltiplicazione: 36 × 4','Divisione: 4 ÷ 36','Addizione: 36 + 4'],explain:'Dividi equamente → DIVISIONE! 36 ÷ 4 = 9'},{text:'La maestra divide 32 fogli tra 8 studenti. Che operazione fa?',correct:'Divisione: 32 ÷ 8',wrong:['Moltiplicazione: 32 × 8','Divisione: 8 ÷ 32','Addizione: 32 + 8'],explain:'Divide in parti uguali → DIVISIONE! 32 ÷ 8 = 4'},{text:'Il nonno divide 28 noci tra 7 nipoti. Che operazione fa?',correct:'Divisione: 28 ÷ 7',wrong:['Moltiplicazione: 28 × 7','Divisione: 7 ÷ 28','Addizione: 28 + 7'],explain:'Divide → DIVISIONE! 28 ÷ 7 = 4'},{text:'Una torta ha 18 fette da dividere tra 3 tavoli. Quante fette per tavolo?',correct:'Divisione: 18 ÷ 3',wrong:['Moltiplicazione: 18 × 3','Divisione: 3 ÷ 18','Addizione: 18 + 3'],explain:'Distribuisci → DIVISIONE! 18 ÷ 3 = 6'},{text:'Un treno parte ogni 6 minuti. Quanti treni in 60 minuti?',correct:'Divisione: 60 ÷ 6',wrong:['Moltiplicazione: 60 × 6','Divisione: 6 ÷ 60','Sottrazione: 60 - 6'],explain:'Dividi il tempo totale → DIVISIONE! 60 ÷ 6 = 10 treni'},{text:'Ogni bambino ha 5 figurine, ci sono 4 bambini. Quante figurine in totale?',correct:'Moltiplicazione: 5 × 4',wrong:['Divisione: 5 ÷ 4','Divisione: 20 ÷ 4','Sottrazione: 5 - 4'],explain:'Ripeti la stessa quantità → MOLTIPLICAZIONE! 5 × 4 = 20'},{text:'Leggi 3 pagine al giorno per 7 giorni. Quante pagine?',correct:'Moltiplicazione: 3 × 7',wrong:['Divisione: 7 ÷ 3','Divisione: 3 ÷ 7','Sottrazione: 7 - 3'],explain:'Ripeti per più giorni → MOLTIPLICAZIONE! 3 × 7 = 21'},{text:'Ci sono 6 sacchetti con 9 caramelle ciascuno. Quante caramelle in totale?',correct:'Moltiplicazione: 6 × 9',wrong:['Divisione: 54 ÷ 6','Divisione: 9 ÷ 6','Sottrazione: 9 - 6'],explain:'Ripeti per ogni sacchetto → MOLTIPLICAZIONE! 6 × 9 = 54'},{text:'Un treno ha 9 vagoni con 8 posti ciascuno. Quanti posti in totale?',correct:'Moltiplicazione: 9 × 8',wrong:['Divisione: 72 ÷ 9','Divisione: 9 ÷ 8','Addizione: 9 + 8'],explain:'Ripeti per ogni vagone → MOLTIPLICAZIONE! 9 × 8 = 72'},{text:'Ci sono 7 amici e ognuno porta 4 libri. Quanti libri in totale?',correct:'Moltiplicazione: 7 × 4',wrong:['Divisione: 28 ÷ 7','Divisione: 7 ÷ 4','Sottrazione: 7 - 4'],explain:'Ripeti per ogni amico → MOLTIPLICAZIONE! 7 × 4 = 28'},{text:'Ci sono 8 file di sedie con 6 sedie per fila. Quante sedie?',correct:'Moltiplicazione: 8 × 6',wrong:['Divisione: 48 ÷ 8','Divisione: 8 ÷ 6','Addizione: 8 + 6'],explain:'Ripeti per ogni fila → MOLTIPLICAZIONE! 8 × 6 = 48'},{text:'Un ragno ha 8 zampe. Quante zampe hanno 5 ragni?',correct:'Moltiplicazione: 8 × 5',wrong:['Divisione: 40 ÷ 8','Divisione: 8 ÷ 5','Addizione: 8 + 5'],explain:'Ripeti per ogni ragno → MOLTIPLICAZIONE! 8 × 5 = 40'},{text:'Mangi 2 mele al giorno per 9 giorni. Quante mele?',correct:'Moltiplicazione: 2 × 9',wrong:['Divisione: 18 ÷ 2','Divisione: 9 ÷ 2','Addizione: 2 + 9'],explain:'Ripeti per più giorni → MOLTIPLICAZIONE! 2 × 9 = 18'},{text:'Guadagni 3 punti per ogni stella. Hai raccolto 9 stelle. Quanti punti?',correct:'Moltiplicazione: 3 × 9',wrong:['Divisione: 27 ÷ 3','Divisione: 9 ÷ 3','Addizione: 3 + 9'],explain:'Ripeti per ogni stella → MOLTIPLICAZIONE! 3 × 9 = 27'}];var s=pool[ri(0,pool.length-1)];var opts=shuffle([s.correct].concat(s.wrong.slice(0,3)));return{type:'brain',badge:'🧠 Ragionamento',cls:'badge-brain',html:s.text,options:opts,correct:s.correct,explain:s.explain,isText:true}}
+
+function qTrappola(){var traps=[{text:'Quale operazione dà come risultato <span class="num">6</span>?',correct:'42 ÷ 7',wrong:['42 × 7','6 × 7','36 ÷ 7'],explain:'42 ÷ 7 = 6. Attenzione: 6 × 7 = 42, non 6!'},{text:'Quale operazione dà come risultato <span class="num">8</span>?',correct:'56 ÷ 7',wrong:['56 × 7','7 × 8','64 ÷ 7'],explain:'56 ÷ 7 = 8. 7 × 8 = 56, risultato diverso!'},{text:'Quale operazione dà come risultato <span class="num">5</span>?',correct:'45 ÷ 9',wrong:['45 × 9','5 × 9','50 ÷ 9'],explain:'45 ÷ 9 = 5. 5 × 9 = 45, non 5!'},{text:'Quale operazione dà come risultato <span class="num">9</span>?',correct:'72 ÷ 8',wrong:['72 × 8','8 × 9','81 ÷ 8'],explain:'72 ÷ 8 = 9. 8 × 9 = 72, non 9!'},{text:'Quale operazione dà come risultato <span class="num">4</span>?',correct:'36 ÷ 9',wrong:['36 × 9','4 × 9','32 ÷ 9'],explain:'36 ÷ 9 = 4. 4 × 9 = 36, non 4!'},{text:'Quale operazione dà come risultato <span class="num">7</span>?',correct:'63 ÷ 9',wrong:['63 × 9','7 × 9','70 ÷ 9'],explain:'63 ÷ 9 = 7. 7 × 9 = 63, non 7!'},{text:'Quale operazione dà come risultato <span class="num">3</span>?',correct:'24 ÷ 8',wrong:['24 × 8','3 × 8','27 ÷ 8'],explain:'24 ÷ 8 = 3. 3 × 8 = 24, non 3!'},{text:'Quale operazione dà come risultato <span class="num">10</span>?',correct:'80 ÷ 8',wrong:['80 × 8','10 × 8','90 ÷ 8'],explain:'80 ÷ 8 = 10. 10 × 8 = 80, non 10!'},{text:'Quale operazione dà come risultato <span class="num">5</span>?',correct:'35 ÷ 7',wrong:['35 × 7','5 × 7','40 ÷ 7'],explain:'35 ÷ 7 = 5. 5 × 7 = 35, non 5!'},{text:'Quale operazione dà come risultato <span class="num">9</span>?',correct:'81 ÷ 9',wrong:['81 × 9','9 × 9','90 ÷ 9'],explain:'81 ÷ 9 = 9. 9 × 9 = 81, non 9!'},{text:'Quale operazione dà come risultato <span class="num">4</span>?',correct:'20 ÷ 5',wrong:['20 × 5','4 × 5','25 ÷ 5'],explain:'20 ÷ 5 = 4. 4 × 5 = 20, non 4!'},{text:'Quale operazione dà come risultato <span class="num">8</span>?',correct:'64 ÷ 8',wrong:['64 × 8','8 × 8','72 ÷ 8'],explain:'64 ÷ 8 = 8. Qui il divisore e il risultato sono uguali!'}];var t=traps[ri(0,traps.length-1)];var opts=shuffle([t.correct].concat(t.wrong.slice(0,3)));return{type:'trap',badge:'⚡ Trappola!',cls:'badge-trap',html:t.text,options:opts,correct:t.correct,explain:t.explain,isText:true}}
+
+function qTrueFalse(){var style=ri(0,3);if(style<=1){var d=ri(2,10),q=ri(1,10),dd=d*q;var isTrue=ri(0,1)===1;var shown,correct;if(isTrue){shown=q;correct=true}else{var fake=q+ri(1,3)*(ri(0,1)?1:-1);if(fake<=0)fake=q+ri(1,3);if(fake===q)fake=q+1;shown=fake;correct=false}return{type:'tf',html:'<span class="num">'+dd+'</span> <span class="op">÷</span> <span class="num">'+d+'</span> <span class="op">=</span> <span class="num">'+shown+'</span>',correct:correct,explain:correct?'Esatto! '+dd+' ÷ '+d+' = '+shown:'No! '+dd+' ÷ '+d+' = '+q+', non '+shown+'!'}}else if(style===2){var d1=ri(2,10),q1=ri(2,10),dd1=d1*q1;var d2=ri(2,10),q2=ri(2,10),dd2=d2*q2;if(q1===q2)return qTrueFalse();var claim=ri(0,1)===0;var correct2=claim===(q1>q2);return{type:'tf',html:'<span class="num">'+dd1+'</span> <span class="op">÷</span> <span class="num">'+d1+'</span> è più grande di <span class="num">'+dd2+'</span> <span class="op">÷</span> <span class="num">'+d2+'</span>',correct:correct2,explain:dd1+' ÷ '+d1+' = '+q1+' e '+dd2+' ÷ '+d2+' = '+q2+'. '+(q1>q2?'Il primo':'Il secondo')+' è più grande!'}}else{var isDivision=ri(0,1)===1;if(isDivision){var ds=[{t:'Dividere 20 mele tra 5 bambini è una divisione',e:'Dividere in parti uguali → divisione!'},{t:'Se hai 36 biscotti e fai 4 gruppi uguali, stai dividendo',e:'Fare gruppi uguali = divisione!'},{t:'Se hai 42 figurine e le dai a 7 amici in parti uguali, fai una divisione',e:'Parti uguali tra amici = divisione!'}];var s=ds[ri(0,ds.length-1)];return{type:'tf',html:s.t,correct:true,explain:s.e}}else{var ms=[{t:'Dividere 20 mele tra 5 bambini è una moltiplicazione',e:'Dividere in parti uguali → è una DIVISIONE, non una moltiplicazione!'},{t:'Per trovare il totale di 5 scatole da 8 biscotti devi dividere',e:'Ripetere una quantità → è una MOLTIPLICAZIONE, non una divisione!'},{t:'Per contare le zampe di 6 gatti fai una divisione',e:'Ogni gatto ha 4 zampe, ripeti per 6 → MOLTIPLICAZIONE!'}];var s2=ms[ri(0,ms.length-1)];return{type:'tf',html:s2.t,correct:false,explain:s2.e}}}}
+
+// BUILD SETS
+function buildClassica(){var qs=[];for(var i=0;i<3;i++)qs.push(qNumericDiv());for(var i=0;i<2;i++)qs.push(qQuanteVolte());for(var i=0;i<2;i++)qs.push(qGruppi());for(var i=0;i<2;i++)qs.push(qMoltODiv());for(var i=0;i<2;i++)qs.push(qTrappola());qs.push(qInversa());qs.push(qCatena());qs.push(qQualeCorretta());qs.push(qQuantiGruppi());qs.push(qConfronto());return shuffle(qs).slice(0,15)}
+function buildBlitz(){var qs=[];var gens=[qNumericDiv,qQuanteVolte,qInversa,qTrappola,qCatena,qQualeCorretta,qQuantiGruppi];for(var i=0;i<50;i++)qs.push(gens[ri(0,gens.length-1)]());return qs}
+function buildVeroFalso(){var qs=[];for(var i=0;i<40;i++)qs.push(qTrueFalse());return qs}
+function buildBoss(){var qs=[];var gens=[qNumericDiv,qGruppi,qMoltODiv,qTrappola,qInversa,qCatena,qQualeCorretta,qQuantiGruppi,qConfronto,qQuantiRestano];for(var i=0;i<15;i++)qs.push(gens[ri(0,gens.length-1)]());return shuffle(qs)}
+
+// === GAME FLOW ===
+var cheers=['Fantastico! 🎉','Bravissima! ⭐','Perfetto! 💪','Esatto! 🌟','Super! 🚀','Grande! 🎯','Mitica! 💥','Wow! 🔥'];
+var encouragements=['Quasi! 💪','Ci sei vicina! 🌈','Riprova! 😊','Non mollare! 💫','Dai che ce la fai! 🌟'];
+
+function goToMenu(){clearInterval(G.timerInterval);showScreen('modeScreen');updateTopbar()}
+function goToProfiles(){clearInterval(G.timerInterval);renderProfiles();showScreen('profileScreen')}
 
 function startMode(mode){
-  ensureAudio();
-  G.mode=mode;G.score=0;G.streak=0;G.bestStreak=0;G.current=0;G.answered=false;G.blitzCount=0;
-  clearInterval(G.timerInterval);
-
-  document.getElementById('modeSelect').classList.add('hidden');
-  document.getElementById('endScreen').classList.add('hidden');
-  document.getElementById('topbar').classList.remove('hidden');
-  document.getElementById('gameArea').classList.remove('hidden');
-
-  const timer=document.getElementById('gameTimer');
-  const bossE=document.getElementById('bossEmoji');
-  const bossBar=document.getElementById('bossHpBar');
-  timer.classList.add('hidden');
-  bossE.classList.add('hidden');
-  bossBar.classList.add('hidden');
-
-  if(mode==='classica'){
-    G.questions=buildClassica();G.total=15;
-    document.getElementById('gameModeLabel').innerHTML='📚 Classica';
-  }else if(mode==='blitz'){
-    G.questions=buildBlitz();G.total=G.questions.length;G.timer=60;
-    document.getElementById('gameModeLabel').innerHTML='⚡ Blitz';
-    timer.classList.remove('hidden');
-    timer.textContent='60';timer.classList.remove('danger');
-    G.timerInterval=setInterval(()=>{
-      G.timer--;timer.textContent=G.timer;
-      if(G.timer<=10)timer.classList.add('danger');
-      if(G.timer<=5)sfxTick();
-      if(G.timer<=0){clearInterval(G.timerInterval);endGame()}
-    },1000);
-  }else if(mode==='verofalso'){
-    G.questions=buildVeroFalso();G.total=G.questions.length;G.timer=45;
-    document.getElementById('gameModeLabel').innerHTML='🎯 Vero o Falso';
-    timer.classList.remove('hidden');
-    timer.textContent='45';timer.classList.remove('danger');
-    G.timerInterval=setInterval(()=>{
-      G.timer--;timer.textContent=G.timer;
-      if(G.timer<=10)timer.classList.add('danger');
-      if(G.timer<=5)sfxTick();
-      if(G.timer<=0){clearInterval(G.timerInterval);endGame()}
-    },1000);
-  }else if(mode==='boss'){
-    G.questions=buildBoss();G.total=G.questions.length;
-    G.bossMaxHp=10;G.bossHp=10;
-    document.getElementById('gameModeLabel').innerHTML='🧚 Sfida Magica';
-    bossE.classList.remove('hidden');bossBar.classList.remove('hidden');
-    bossE.className='boss-emoji';
-    updateBossHp();
-  }
-  updateTopbar();
-  renderQ();
+  ensureAudio();G.mode=mode;G.score=0;G.streak=0;G.bestStreak=0;G.current=0;G.answered=false;G.blitzCount=0;
+  clearInterval(G.timerInterval);showScreen('gameArea');
+  var timer=document.getElementById('gameTimer');var bossE=document.getElementById('bossEmoji');var bossBar=document.getElementById('bossHpBar');
+  timer.classList.add('hidden');bossE.classList.add('hidden');bossBar.classList.add('hidden');
+  if(mode==='classica'){G.questions=buildClassica();G.total=15;document.getElementById('gameModeLabel').innerHTML='📚 Classica'}
+  else if(mode==='blitz'){G.questions=buildBlitz();G.total=G.questions.length;G.timer=60;document.getElementById('gameModeLabel').innerHTML='⚡ Blitz';timer.classList.remove('hidden');timer.textContent='60';timer.classList.remove('danger');G.timerInterval=setInterval(function(){G.timer--;timer.textContent=G.timer;if(G.timer<=10)timer.classList.add('danger');if(G.timer<=5)sfxTick();if(G.timer<=0){clearInterval(G.timerInterval);endGame()}},1000)}
+  else if(mode==='verofalso'){G.questions=buildVeroFalso();G.total=G.questions.length;G.timer=45;document.getElementById('gameModeLabel').innerHTML='🎯 Vero o Falso';timer.classList.remove('hidden');timer.textContent='45';timer.classList.remove('danger');G.timerInterval=setInterval(function(){G.timer--;timer.textContent=G.timer;if(G.timer<=10)timer.classList.add('danger');if(G.timer<=5)sfxTick();if(G.timer<=0){clearInterval(G.timerInterval);endGame()}},1000)}
+  else if(mode==='boss'){G.questions=buildBoss();G.total=G.questions.length;G.bossMaxHp=10;G.bossHp=10;document.getElementById('gameModeLabel').innerHTML='🧚 Sfida Magica';bossE.classList.remove('hidden');bossBar.classList.remove('hidden');bossE.className='boss-emoji';updateBossHp()}
+  updateTopbar();renderQ();
 }
 
 function renderQ(){
-  G.answered=false;
-  if(G.current>=G.questions.length){endGame();return}
-  const q=G.questions[G.current];
-  const card=document.getElementById('qCard');
-  card.style.animation='none';card.offsetHeight;card.style.animation='';
-
-  const badge=document.getElementById('qBadge');
-  const grid=document.getElementById('answersGrid');
-  const fb=document.getElementById('fbArea');
-  fb.classList.add('hidden');fb.innerHTML='';
-
-  const combo=document.getElementById('comboDisp');
-  if(G.streak>=3){combo.classList.remove('hidden');combo.textContent=`x${getMultiplier()}`}
-  else combo.classList.add('hidden');
-
-  // Progress
-  if(G.mode==='classica')document.getElementById('progressBar').style.width=`${(G.current/G.total)*100}%`;
-  else if(G.mode==='boss')document.getElementById('progressBar').style.width=`${((G.bossMaxHp-G.bossHp)/G.bossMaxHp)*100}%`;
-  else document.getElementById('progressBar').style.width=`${Math.min((G.blitzCount/20)*100,100)}%`;
-
-  if(q.type==='tf'){
-    // True/False mode
-    badge.className='q-badge badge-calc';badge.innerHTML='🎯 Vero o Falso';
-    document.getElementById('qText').innerHTML=q.html;
-    grid.innerHTML='';
-    const btnT=document.createElement('button');
-    btnT.className='tf-btn tf-true';btnT.textContent='✅ VERO';
-    btnT.addEventListener('click',function(){checkTF(true,btnT,btnF,q)});
-    const btnF=document.createElement('button');
-    btnF.className='tf-btn tf-false';btnF.textContent='❌ FALSO';
-    btnF.addEventListener('click',function(){checkTF(false,btnF,btnT,q)});
-    grid.className='tf-grid';
+  G.answered=false;if(G.current>=G.questions.length){endGame();return}
+  var q=G.questions[G.current];var card=document.getElementById('qCard');card.style.animation='none';card.offsetHeight;card.style.animation='';
+  var badge=document.getElementById('qBadge');var grid=document.getElementById('answersGrid');var fb=document.getElementById('fbArea');fb.classList.add('hidden');fb.innerHTML='';
+  var combo=document.getElementById('comboDisp');if(G.streak>=3){combo.classList.remove('hidden');combo.textContent='x'+getMultiplier()}else combo.classList.add('hidden');
+  if(G.mode==='classica')document.getElementById('progressBar').style.width=(G.current/G.total)*100+'%';
+  else if(G.mode==='boss')document.getElementById('progressBar').style.width=((G.bossMaxHp-G.bossHp)/G.bossMaxHp)*100+'%';
+  else document.getElementById('progressBar').style.width=Math.min((G.blitzCount/20)*100,100)+'%';
+  if(q.type==='tf'){badge.className='q-badge badge-calc';badge.innerHTML='🎯 Vero o Falso';document.getElementById('qText').innerHTML=q.html;grid.innerHTML='';grid.className='tf-grid';
+    var btnT=document.createElement('button');btnT.className='tf-btn tf-true';btnT.textContent='✅ VERO';
+    var btnF=document.createElement('button');btnF.className='tf-btn tf-false';btnF.textContent='❌ FALSO';
+    btnT.addEventListener('click',function(){checkTF(true,btnT,btnF,q)});btnF.addEventListener('click',function(){checkTF(false,btnF,btnT,q)});
     grid.appendChild(btnT);grid.appendChild(btnF);
-  }else{
-    // Regular MC
-    grid.className='answers-grid';
-    badge.className=`q-badge ${q.cls}`;badge.innerHTML=q.badge;
-    document.getElementById('qText').innerHTML=q.html;
-    grid.innerHTML='';
-    q.options.forEach(opt=>{
-      const b=document.createElement('button');
-      b.className='ans-btn'+(q.isText?' textual':'');
-      b.textContent=opt;
-      b.addEventListener('click',function(){checkAns(opt,b,q)});
-      grid.appendChild(b);
-    });
+  }else{grid.className='answers-grid';badge.className='q-badge '+q.cls;badge.innerHTML=q.badge;document.getElementById('qText').innerHTML=q.html;grid.innerHTML='';
+    q.options.forEach(function(opt){var b=document.createElement('button');b.className='ans-btn'+(q.isText?' textual':'');b.textContent=opt;b.addEventListener('click',function(){checkAns(opt,b,q)});grid.appendChild(b)});
   }
 }
 
-function getMultiplier(){
-  if(G.streak>=10)return 4;
-  if(G.streak>=7)return 3;
-  if(G.streak>=3)return 2;
-  return 1;
-}
-
-function showXpToast(amount){
-  const t=document.createElement('div');t.className='xp-toast';
-  t.textContent=`+${amount} XP`;
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),1000);
-}
-
-function showStreakToast(text){
-  const t=document.createElement('div');t.className='streak-toast';
-  t.textContent=text;t.style.color=`hsl(${ri(300,360)},80%,65%)`;
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),1200);
-}
-
-const cheers=['Fantastico! 🎉','Bravissima! ⭐','Perfetto! 💪','Esatto! 🌟','Super! 🚀','Grande! 🎯','Mitica! 💥','Wow! 🔥'];
-const encouragements=['Quasi! 💪','Ci sei vicina! 🌈','Riprova! 😊','Non mollare! 💫','Dai che ce la fai! 🌟'];
+function getMultiplier(){if(G.streak>=10)return 4;if(G.streak>=7)return 3;if(G.streak>=3)return 2;return 1}
+function showXpToast(a){var t=document.createElement('div');t.className='xp-toast';t.textContent='+'+a+' XP';document.body.appendChild(t);setTimeout(function(){t.remove()},1000)}
+function showStreakToast(text){var t=document.createElement('div');t.className='streak-toast';t.textContent=text;t.style.color='hsl('+ri(300,360)+',80%,65%)';document.body.appendChild(t);setTimeout(function(){t.remove()},1200)}
 
 function handleCorrect(btn){
-  sfxCorrect();
-  btn.classList.add('correct');
-  G.score++;G.streak++;G.totalCorrect++;
+  sfxCorrect();btn.classList.add('correct');G.score++;G.streak++;if(currentProfile)currentProfile.totalCorrect++;
   if(G.streak>G.bestStreak)G.bestStreak=G.streak;
-
-  const mult=getMultiplier();
-  const xp=10*mult;
-  addXP(xp);
-
-  const rect=btn.getBoundingClientRect();
-  burstParticles(rect.left+rect.width/2,rect.top+rect.height/2,'#A5D6A7',8);
-
-  if(G.streak===3)showStreakToast('🔥 Combo x2!');
-  if(G.streak===7)showStreakToast('🔥🔥 Combo x3!');
-  if(G.streak===10){showStreakToast('💥 COMBO x4!');confettiBurst(30)}
-
+  var mult=getMultiplier();var xp=10*mult;addXP(xp);
+  var rect=btn.getBoundingClientRect();burstParticles(rect.left+rect.width/2,rect.top+rect.height/2,'#A5D6A7',8);
+  if(G.streak===3)showStreakToast('🔥 Combo x2!');if(G.streak===7)showStreakToast('🔥🔥 Combo x3!');if(G.streak===10){showStreakToast('💥 COMBO x4!');confettiBurst(30)}
   showXpToast(xp);
-
-  if(G.mode==='boss'){
-    G.bossHp--;updateBossHp();
-    const be=document.getElementById('bossEmoji');
-    be.className='boss-emoji hit';setTimeout(()=>{if(G.bossHp>0)be.className='boss-emoji'},400);
-    sfxBossHit();
-    if(G.bossHp<=0){bossDefeated()}
-  }
-
+  if(G.mode==='boss'){G.bossHp--;updateBossHp();var be=document.getElementById('bossEmoji');be.className='boss-emoji hit';setTimeout(function(){if(G.bossHp>0)be.className='boss-emoji'},400);sfxBossHit();if(G.bossHp<=0)bossDefeated()}
   return cheers[ri(0,cheers.length-1)];
 }
-
-function handleWrong(btn){
-  sfxWrong();
-  btn.classList.add('wrong');
-  G.streak=0;
-
-  const rect=btn.getBoundingClientRect();
-  burstParticles(rect.left+rect.width/2,rect.top+rect.height/2,'#EF9A9A',6);
-
-  return encouragements[ri(0,encouragements.length-1)];
-}
+function handleWrong(btn){sfxWrong();btn.classList.add('wrong');G.streak=0;var rect=btn.getBoundingClientRect();burstParticles(rect.left+rect.width/2,rect.top+rect.height/2,'#EF9A9A',6);return encouragements[ri(0,encouragements.length-1)]}
 
 function checkAns(selected,btn,q){
-  if(G.answered)return;
-  G.answered=true;
-  document.querySelectorAll('.ans-btn').forEach(b=>{
-    if(b.textContent===q.correct)b.classList.add('correct');
-    b.style.pointerEvents='none';
-  });
-  const ok=selected===q.correct;
-  const msg=ok?handleCorrect(btn):handleWrong(btn);
-  updateTopbar();
-  G.blitzCount++;
-
-  // Boss: if defeated, handleCorrect already triggered endGame via bossDefeated
-  if(G.mode==='boss'&&G.bossHp<=0) return;
-
+  if(G.answered)return;G.answered=true;
+  var all=document.querySelectorAll('.ans-btn');for(var i=0;i<all.length;i++){if(all[i].textContent===q.correct)all[i].classList.add('correct');all[i].style.pointerEvents='none'}
+  var ok=selected===q.correct;var msg=ok?handleCorrect(btn):handleWrong(btn);updateTopbar();G.blitzCount++;
+  if(G.mode==='boss'&&G.bossHp<=0)return;
   showFeedback(ok,msg,q.explain);
-
-  if(G.mode==='classica'){
-    // classica uses next button (added inside showFeedback)
-  }else{
-    // blitz, verofalso, boss: auto-advance
-    setTimeout(()=>{G.current++;renderQ()},ok?700:1600);
-  }
+  if(G.mode!=='classica')setTimeout(function(){G.current++;renderQ()},ok?700:1600);
 }
-
 function checkTF(val,btn,otherBtn,q){
-  if(G.answered)return;
-  G.answered=true;
-  btn.style.pointerEvents='none';otherBtn.style.pointerEvents='none';
-  const ok=val===q.correct;
-  if(ok){btn.classList.add('correct');handleCorrect(btn)}
-  else{btn.classList.add('wrong');otherBtn.classList.add('correct');handleWrong(btn)}
-  showFeedback(ok,ok?cheers[ri(0,cheers.length-1)]:encouragements[ri(0,encouragements.length-1)],q.explain);
-  updateTopbar();
-  G.blitzCount++;
-  setTimeout(()=>{G.current++;renderQ()},ok?600:1500);
+  if(G.answered)return;G.answered=true;btn.style.pointerEvents='none';otherBtn.style.pointerEvents='none';
+  var ok=val===q.correct;if(ok){btn.classList.add('correct');handleCorrect(btn)}else{btn.classList.add('wrong');otherBtn.classList.add('correct');handleWrong(btn)}
+  showFeedback(ok,ok?cheers[ri(0,cheers.length-1)]:encouragements[ri(0,encouragements.length-1)],q.explain);updateTopbar();G.blitzCount++;
+  setTimeout(function(){G.current++;renderQ()},ok?600:1500);
 }
-
 function showFeedback(ok,msg,explain){
-  const fb=document.getElementById('fbArea');
-  fb.classList.remove('hidden');
-  let html=`<div class="fb-msg ${ok?'ok':'ko'}">${msg}</div>`;
-  if(!ok)html+=`<div class="fb-explain">💡 ${explain}</div>`;
-
-  if(G.mode==='classica'){
-    html+=`<button class="next-btn" id="nextQBtn">${G.current<G.total-1?'Avanti ➡️':'Risultato! 🏆'}</button>`;
-  }
+  var fb=document.getElementById('fbArea');fb.classList.remove('hidden');
+  var html='<div class="fb-msg '+(ok?'ok':'ko')+'">'+msg+'</div>';
+  if(!ok)html+='<div class="fb-explain">💡 '+explain+'</div>';
+  if(G.mode==='classica')html+='<button class="next-btn" id="nextQBtn">'+(G.current<G.total-1?'Avanti ➡️':'Risultato! 🏆')+'</button>';
   fb.innerHTML=html;
-  const nBtn=document.getElementById('nextQBtn');
-  if(nBtn)nBtn.addEventListener('click',function(){nextQ()});
+  var nBtn=document.getElementById('nextQBtn');if(nBtn)nBtn.addEventListener('click',function(){nextQ()});
 }
-
 function nextQ(){G.current++;if(G.current>=G.total)endGame();else renderQ()}
+function updateBossHp(){document.getElementById('bossHpFill').style.width=(G.bossHp/G.bossMaxHp)*100+'%';document.getElementById('bossHpLabel').textContent=Math.max(G.bossHp,0)+' / '+G.bossMaxHp}
+function bossDefeated(){sfxBossDefeat();document.getElementById('bossEmoji').className='boss-emoji defeated';confettiBurst(60);addXP(50);showXpToast(50);setTimeout(function(){endGame()},1200)}
 
-function updateBossHp(){
-  document.getElementById('bossHpFill').style.width=`${(G.bossHp/G.bossMaxHp)*100}%`;
-  document.getElementById('bossHpLabel').textContent=`${Math.max(G.bossHp,0)} / ${G.bossMaxHp}`;
-}
-
-function bossDefeated(){
-  sfxBossDefeat();
-  const be=document.getElementById('bossEmoji');
-  be.className='boss-emoji defeated';
-  confettiBurst(60);
-  addXP(50);showXpToast(50);
-  setTimeout(()=>endGame(),1200);
-}
-
-// =============================================
-// END GAME
-// =============================================
 function endGame(){
   clearInterval(G.timerInterval);
-  document.getElementById('gameArea').classList.add('hidden');
-  document.getElementById('endScreen').classList.remove('hidden');
-
-  let total,pct,title,detail;
-  if(G.mode==='blitz'||G.mode==='verofalso'){
-    total=G.blitzCount;pct=total>0?G.score/total:0;
-    document.getElementById('endScore').textContent=`${G.score} ✓`;
-    detail=`${G.score} risposte corrette su ${total} in ${G.mode==='blitz'?'60':'45'} secondi!`;
-  }else if(G.mode==='boss'){
-    total=G.total;pct=G.bossHp<=0?1:G.score/total;
-    document.getElementById('endScore').textContent=G.bossHp<=0?'🧙‍♀️✨':'😢';
-    detail=G.bossHp<=0?`Strega sconfitta con ${G.score} risposte giuste!`:`La strega ha vinto... riprova!`;
-  }else{
-    total=G.total;pct=G.score/total;
-    document.getElementById('endScore').textContent=`${G.score}/${total}`;
-    detail=`Miglior serie: ${G.bestStreak} di fila!`;
+  if(currentProfile){currentProfile.gamesPlayed++;if(G.bestStreak>currentProfile.bestStreak)currentProfile.bestStreak=G.bestStreak;
+    if(G.mode==='boss'&&G.bossHp<=0)awardTrophy('boss_win');
+    if(G.mode==='classica'&&G.score===G.total)awardTrophy('perfect');
+    if(G.mode==='blitz'&&G.score>=10)awardTrophy('blitz_10');
+    if(G.mode==='blitz'&&G.score>=20)awardTrophy('blitz_20');
+    var newTrophies=checkTrophies();saveCurrentProfile();
   }
-
-  const stars=pct>=0.9?3:pct>=0.7?2:pct>=0.5?1:0;
-  if(pct>=0.9){title='Sei un genio! 🧠✨'}
-  else if(pct>=0.7){title='Bravissima! 💪'}
-  else if(pct>=0.5){title='Buon lavoro! 👍'}
-  else{title='Non mollare! 🌟'}
-
+  showScreen('endScreen');
+  var total,pct,title,detail;
+  if(G.mode==='blitz'||G.mode==='verofalso'){total=G.blitzCount;pct=total>0?G.score/total:0;document.getElementById('endScore').textContent=G.score+' ✓';detail=G.score+' risposte corrette su '+total+'!'}
+  else if(G.mode==='boss'){total=G.total;pct=G.bossHp<=0?1:G.score/total;document.getElementById('endScore').textContent=G.bossHp<=0?'🧙‍♀️✨':'😢';detail=G.bossHp<=0?'Strega sconfitta con '+G.score+' risposte giuste!':'La strega ha vinto... riprova!'}
+  else{total=G.total;pct=G.score/total;document.getElementById('endScore').textContent=G.score+'/'+total;detail='Miglior serie: '+G.bestStreak+' di fila!'}
+  var stars=pct>=0.9?3:pct>=0.7?2:pct>=0.5?1:0;
+  if(pct>=0.9)title='Sei un genio! 🧠✨';else if(pct>=0.7)title='Bravissima! 💪';else if(pct>=0.5)title='Buon lavoro! 👍';else title='Non mollare! 🌟';
   document.getElementById('endTitle').textContent=title;
   document.getElementById('endStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);
   document.getElementById('endDetail').textContent=detail;
-  document.getElementById('endXp').textContent=`+${G.score*10} XP guadagnati!`;
+  document.getElementById('endXp').textContent='+'+G.score*10+' XP guadagnati!';
   document.getElementById('endTrophy').textContent=G.mode==='boss'?(G.bossHp<=0?'🧚':'😢'):'🏆';
-
+  document.getElementById('endNewTrophies').textContent=newTrophies&&newTrophies.length>0?'Nuovo trofeo: '+newTrophies.join(', '):'';
   if(pct>=0.7)confettiBurst(40);
-  saveProgress();
 }
 
-// =============================================
-// INIT — all event listeners, no inline onclick
-// =============================================
-try{loadProgress()}catch(e){}
-try{updateTopbar()}catch(e){}
-
-document.getElementById('modeClassica').addEventListener('click',function(e){e.preventDefault();startMode('classica')});
-document.getElementById('modeBlitz').addEventListener('click',function(e){e.preventDefault();startMode('blitz')});
-document.getElementById('modeVeroFalso').addEventListener('click',function(e){e.preventDefault();startMode('verofalso')});
-document.getElementById('modeBoss').addEventListener('click',function(e){e.preventDefault();startMode('boss')});
-document.getElementById('playAgainBtn').addEventListener('click',function(e){e.preventDefault();goToMenu()});
+// === INIT ===
+renderAvatarPicker();renderProfiles();
+document.getElementById('newProfileBtn').addEventListener('click',function(){showScreen('createScreen')});
+var resetPending=false;
+document.getElementById('resetAllBtn').addEventListener('click',function(){
+  var btn=document.getElementById('resetAllBtn');
+  if(!resetPending){
+    resetPending=true;btn.textContent='⚠️ Tocca di nuovo per confermare';btn.style.fontWeight='800';
+    setTimeout(function(){resetPending=false;btn.textContent='🗑️ Cancella tutti i dati';btn.style.fontWeight=''},3000);
+  }else{
+    try{if(typeof localStorage!=='undefined')localStorage.clear()}catch(e){}
+    resetPending=false;btn.textContent='✅ Dati cancellati!';btn.style.fontWeight='';
+    setTimeout(function(){btn.textContent='🗑️ Cancella tutti i dati';renderProfiles()},1500);
+  }
+});
+document.getElementById('backToProfiles').addEventListener('click',function(){renderProfiles();showScreen('profileScreen')});
+document.getElementById('nameInput').addEventListener('input',function(){checkCreateReady()});
+document.getElementById('createBtn').addEventListener('click',function(){createProfile()});
+document.getElementById('modeClassica').addEventListener('click',function(){startMode('classica')});
+document.getElementById('modeBlitz').addEventListener('click',function(){startMode('blitz')});
+document.getElementById('modeVeroFalso').addEventListener('click',function(){startMode('verofalso')});
+document.getElementById('modeBoss').addEventListener('click',function(){startMode('boss')});
+document.getElementById('playAgainBtn').addEventListener('click',function(){goToMenu()});
+document.getElementById('backMenuBtn').addEventListener('click',function(){
+  var fb=document.getElementById('fbArea');
+  if(fb.querySelector('.confirm-exit')){goToMenu();return}
+  fb.classList.remove('hidden');
+  fb.innerHTML='<div class="confirm-exit" style="text-align:center;padding:12px"><div style="font-weight:700;margin-bottom:10px;color:var(--text)">Vuoi tornare al menù?</div><div style="display:flex;gap:10px"><button class="next-btn" id="confirmYes" style="background:linear-gradient(135deg,var(--pink),var(--lilac))">Sì, esci</button><button class="next-btn" id="confirmNo" style="background:rgba(0,0,0,0.1);color:var(--text)">No, continuo!</button></div></div>';
+  document.getElementById('confirmYes').addEventListener('click',function(){goToMenu()});
+  document.getElementById('confirmNo').addEventListener('click',function(){fb.classList.add('hidden');fb.innerHTML=''});
+});
+document.getElementById('showLeaderboard').addEventListener('click',function(){renderLeaderboard();showScreen('lbScreen')});
+document.getElementById('showTrophies').addEventListener('click',function(){renderTrophies();showScreen('trophyScreen')});
+document.getElementById('switchProfile').addEventListener('click',function(){goToProfiles()});
+document.getElementById('lbBack').addEventListener('click',function(){showScreen('modeScreen')});
+document.getElementById('trophyBack').addEventListener('click',function(){showScreen('modeScreen')});
 </script>
-
 </body>
 </html>
